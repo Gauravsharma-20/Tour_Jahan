@@ -10,8 +10,9 @@ import MyTicketsScreen from '../screens/TicketScreen';
 import AddReviewScreen from '../screens/ReviewScreen';
 import FindGuideScreen from '../screens/GuideScreen';
 import FindLocationScreen from '../screens/LocationScreen';
+import useAuth, { AuthProvider } from '../hooks/useAuth';
+import IntroScreen from '../screens/IntroScreen';
 import TicketDetail from '../screens/TicketDetailScreen';
-import { AuthProvider } from '../hooks/useAuth';
 
 const Tab = createBottomTabNavigator();
 
@@ -255,98 +256,99 @@ function FindLocationNavigatorScreen() {
 	);
 }
 
-export default function Main() {
-	return (
-		<NavigationContainer>
-			<AuthProvider>
-				<Tab.Navigator
-					initialRouteName='Home'
-					screenOptions={{ headerShown: false }}
-					tabBarOptions={{
-						initialRouteName: 'Home',
-						activeBackgroundColor: '#51C4D3',
-						inactiveBackgroundColor: '#1597BB',
-						activeTintColor: '#fff',
-						inactiveTintColor: '#fff',
-					}}
-				>
-					<Tab.Screen
-						name='Home'
-						component={HomeNavigatorScreen}
-						options={{
-							title: 'Home',
-							tabBarIcon: ({ color: tintColor, focused }) => (
-								<Icon
-									name='home'
-									type='font-awesome-5'
-									size={focused ? 30 : 24}
-									iconStyle={{ color: tintColor }}
-								/>
-							),
-						}}
-					/>
-					<Tab.Screen
-						name='Tickets'
-						component={MyTicketsNavigatorScreen}
-						options={{
-							title: 'Tickets',
-							tabBarIcon: ({ color: tintColor, focused }) => (
-								<Icon
-									name='ticket-alt'
-									type='font-awesome-5'
-									size={focused ? 30 : 24}
-									iconStyle={{ color: tintColor }}
-								/>
-							),
-						}}
-					/>
-					<Tab.Screen
-						name='Review'
-						component={AddReviewNavigatorScreen}
-						options={{
-							title: 'Review',
-							tabBarIcon: ({ color: tintColor, focused }) => (
-								<Icon
-									name='edit'
-									type='font-awesome-5'
-									size={focused ? 30 : 24}
-									iconStyle={{ color: tintColor }}
-								/>
-							),
-						}}
-					/>
-					<Tab.Screen
-						name='Guides'
-						component={FindGuideNavigatorScreen}
-						options={{
-							title: 'Guides',
-							tabBarIcon: ({ color: tintColor, focused }) => (
-								<Icon
-									name='user-tie'
-									type='font-awesome-5'
-									size={focused ? 30 : 24}
-									iconStyle={{ color: tintColor }}
-								/>
-							),
-						}}
-					/>
-					<Tab.Screen
-						name='Locations'
-						component={FindLocationNavigatorScreen}
-						options={{
-							title: 'Locations',
-							tabBarIcon: ({ color: tintColor, focused }) => (
-								<Icon
-									name='globe'
-									type='font-awesome-5'
-									size={focused ? 30 : 24}
-									iconStyle={{ color: tintColor }}
-								/>
-							),
-						}}
-					/>
-				</Tab.Navigator>
-			</AuthProvider>
-		</NavigationContainer>
+export default function MainNavigator() {
+	const { user } = useAuth();
+	console.log(user);
+
+	return user ? (
+		<Tab.Navigator
+			initialRouteName='Home'
+			screenOptions={{ headerShown: false }}
+			tabBarOptions={{
+				initialRouteName: 'Home',
+				activeBackgroundColor: '#51C4D3',
+				inactiveBackgroundColor: '#1597BB',
+				activeTintColor: '#fff',
+				inactiveTintColor: '#fff',
+			}}
+		>
+			<Tab.Screen
+				name='Home'
+				component={HomeNavigatorScreen}
+				options={{
+					title: 'Home',
+					tabBarIcon: ({ color: tintColor, focused }) => (
+						<Icon
+							name='home'
+							type='font-awesome-5'
+							size={focused ? 30 : 24}
+							iconStyle={{ color: tintColor }}
+						/>
+					),
+				}}
+			/>
+			<Tab.Screen
+				name='Tickets'
+				component={MyTicketsNavigatorScreen}
+				options={{
+					title: 'Tickets',
+					tabBarIcon: ({ color: tintColor, focused }) => (
+						<Icon
+							name='ticket-alt'
+							type='font-awesome-5'
+							size={focused ? 30 : 24}
+							iconStyle={{ color: tintColor }}
+						/>
+					),
+				}}
+			/>
+			<Tab.Screen
+				name='Review'
+				component={AddReviewNavigatorScreen}
+				options={{
+					title: 'Review',
+					tabBarIcon: ({ color: tintColor, focused }) => (
+						<Icon
+							name='edit'
+							type='font-awesome-5'
+							size={focused ? 30 : 24}
+							iconStyle={{ color: tintColor }}
+						/>
+					),
+				}}
+			/>
+			<Tab.Screen
+				name='Guides'
+				component={FindGuideNavigatorScreen}
+				options={{
+					title: 'Guides',
+					tabBarIcon: ({ color: tintColor, focused }) => (
+						<Icon
+							name='user-tie'
+							type='font-awesome-5'
+							size={focused ? 30 : 24}
+							iconStyle={{ color: tintColor }}
+						/>
+					),
+				}}
+			/>
+			<Tab.Screen
+				name='Locations'
+				component={FindLocationNavigatorScreen}
+				options={{
+					title: 'Locations',
+					tabBarIcon: ({ color: tintColor, focused }) => (
+						<Icon
+							name='globe'
+							type='font-awesome-5'
+							size={focused ? 30 : 24}
+							iconStyle={{ color: tintColor }}
+						/>
+					),
+				}}
+			/>
+		</Tab.Navigator>
+	) : (
+		<IntroScreen />
 	);
 }

@@ -1,9 +1,46 @@
 import * as React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import {
+	View,
+	Text,
+	Image,
+	StyleSheet,
+	TextInput,
+	Button,
+	TouchableOpacity,
+} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
+import FlatButton from '../shared/button';
 import colors from '../theme';
+// import {
+// 	FirebaseRecaptchaVerifierModal,
+// 	FirebaseRecaptchaBanner,
+// } from 'expo-firebase-recaptcha';
+// import { app } from '../firebase/firebase';
+import useAuth from '../hooks/useAuth';
 
 const IntroScreen = () => {
+	// const {
+	// 	loading,
+	// 	sendVerificationCode,
+	// 	handleVerification,
+	// 	phoneNumber,
+	// 	setPhoneNumber,
+	// 	verificationId,
+	// 	setVerificationCode,
+	//     message,
+	//     showMessage,
+	//     recaptchaVerifier
+	// } = useAuth();
+	// const recaptchaVerifier = React.useRef(null);
+	// const [phoneNumber, setPhoneNumber] = React.useState();
+	// const [verificationId, setVerificationId] = React.useState();
+	// const [verificationCode, setVerificationCode] = React.useState();
+
+	// const firebaseConfig = app ? app.options : undefined;
+	// const [message, showMessage] = React.useState();
+	// const attemptInvisibleVerification = false;
+	const { signInWithGoogle, loading } = useAuth();
+
 	const RenderItem = ({ item }) => {
 		return (
 			<View
@@ -22,18 +59,83 @@ const IntroScreen = () => {
 				{item.key == 5 && (
 					<View style={styles.logButton}>
 						<Text style={styles.logButtonText}>
-							{/* {loading ? 'Loading . . . ' : 'Login to the app'} */}
+							{loading ? 'Loading . . . ' : 'Login to the app'}
 						</Text>
 						<FlatButton
 							text='Sign In With Google'
-							// onPress={signInWithGoogle}
-							// onPress={() => {
-							// 	promptAsync({
-							// 		useProxy: false,
-							// 		showInRecents: true,
-							// 	});
-							// }}
+							onPress={signInWithGoogle}
 						/>
+						{/* <FirebaseRecaptchaVerifierModal
+							ref={recaptchaVerifier}
+							firebaseConfig={app.options}
+						/> */}
+						{/* <Text style={styles.logButtonText}>
+							{loading ? 'Loading . . . ' : 'Enter phone number'}
+						</Text>
+						<TextInput
+							style={{
+								marginVertical: 10,
+								fontSize: 17,
+								backgroundColor: '#fff',
+							}}
+							placeholder='+91 999 999 9999'
+							autoFocus
+							autoCompleteType='tel'
+							keyboardType='phone-pad'
+							textContentType='telephoneNumber'
+							onChangeText={(phoneNumber) =>
+								setPhoneNumber(phoneNumber)
+							}
+						/>
+						<Button
+							title='Send Verification Code'
+							// disabled={!phoneNumber}
+							onPress={sendVerificationCode}
+						/>
+						<Text style={{ marginTop: 20 }}>
+							Enter Verification code
+						</Text>
+						<TextInput
+							style={{
+								marginVertical: 10,
+								fontSize: 17,
+								backgroundColor: '#fff',
+							}}
+							editable={!!verificationId}
+							placeholder='123456'
+							onChangeText={setVerificationCode}
+						/>
+						<Button
+							title='Confirm Verification Code'
+							disabled={!verificationId}
+							onPress={handleVerification}
+						/>
+						{message ? (
+							<TouchableOpacity
+								style={[
+									StyleSheet.absoluteFill,
+									{
+										backgroundColor: 0xffffffee,
+										justifyContent: 'center',
+									},
+								]}
+								onPress={() => showMessage(undefined)}
+							>
+								<Text
+									style={{
+										color: message.color || 'blue',
+										fontSize: 17,
+										textAlign: 'center',
+										margin: 20,
+									}}
+								>
+									{message.text}
+								</Text>
+							</TouchableOpacity>
+						) : undefined}
+						{attemptInvisibleVerification && (
+							<FirebaseRecaptchaBanner />
+						)} */}
 					</View>
 				)}
 			</View>
@@ -42,7 +144,10 @@ const IntroScreen = () => {
 
 	return (
 		<AppIntroSlider
-			activeDotStyle={{ backgroundColor: colors.intro.activeDotStyle, width: '5%' }}
+			activeDotStyle={{
+				backgroundColor: colors.intro.activeDotStyle,
+				width: '5%',
+			}}
 			dotStyle={{
 				backgroundColor: '#eeeeee',
 				width: '2%',
@@ -93,7 +198,7 @@ const slides = [
 	{
 		key: 1,
 		title: 'WELCOME !',
-		text: 'Welcome to the #1 ads-free Stock Watchlist App, an Open Source Project by the students of ACM-CSS PEC',
+		text: 'Welcome to TourJahan, a ticket booking app by the Ministry of Culture.',
 		image: require('../components/images/Logo.png'),
 		backgroundColor: colors.intro.backgroundColor,
 	},
