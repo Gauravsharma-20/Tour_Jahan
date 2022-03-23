@@ -6,6 +6,7 @@ import {
 	StyleSheet,
 	ImageBackground,
 	ScrollView,
+	Image
 } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements';
 import TouchableScale from 'react-native-touchable-scale';
@@ -13,6 +14,7 @@ import HeaderComponent from '../components/frequent/HeaderComponent';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconFeather from 'react-native-vector-icons/Feather';
 import { guideData } from '../data/guideData';
+import verifyImage from '../components/images/verify.png';
 
 class FindGuide extends React.Component {
 	renderListItem = (item) => {
@@ -41,38 +43,45 @@ class FindGuide extends React.Component {
 					>
 						{item.Name}
 					</ListItem.Title>
-					<Text
-						style={{
-							color: 'red',
-							marginBottom: '1%',
-							marginTop: '1%',
-						}}
-					>
-						<IconEntypo
-							name='location-pin'
-							size={20}
-							style={{ marginTop: '10%' }}
-						/>
-						<Text style={{ paddingBottom: '50%' }}>
-							{item.WorkCity + ', ' + item.WorkState}
-						</Text>
-					</Text>
-					<Text
-						style={{
-							color: 'red',
-							marginBottom: '1%',
-							marginTop: '1%',
-						}}
-					>
-						<IconFeather
-							name='phone-call'
-							size={20}
-							style={{ marginTop: '10%' }}
-						/>
-						<Text style={{ paddingBottom: '50%' }}>
-							{item.Contact}
-						</Text>
-					</Text>
+					<View style={{ flex:1, flexDirection: 'row', flexWrap:'wrap', alignItems:'flex-start' }}>
+						<View style={{width:"90%"}}>
+							<Text
+								style={{
+									color: 'red',
+									marginBottom: '1%',
+									marginTop: '1%',
+								}}
+							>
+								<IconEntypo
+									name='location-pin'
+									size={20}
+									style={{ marginTop: '10%' }}
+								/>
+								<Text style={{ paddingBottom: '50%' }}>
+									{item.WorkCity + ', ' + item.WorkState}
+								</Text>
+							</Text>
+							<Text
+								style={{
+									color: 'red',
+									marginBottom: '1%',
+									marginTop: '1%',
+								}}
+							>
+								<IconFeather
+									name='phone-call'
+									size={20}
+									style={{ marginTop: '10%' }}
+								/>
+								<Text style={{ paddingBottom: '50%' }}>
+									{item.Contact}
+								</Text>
+							</Text>
+						</View>
+						<View style={{width:"10%"}}>
+								{item.verified?<Image source={verifyImage} style={{width:30, height:30}}  />:<Text></Text>}
+						</View>
+					</View>
 				</ListItem.Content>
 			</ListItem>
 		);
