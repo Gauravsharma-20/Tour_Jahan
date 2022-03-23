@@ -59,7 +59,7 @@ export const guideData = [
         WorkCity: "Jaipur",
         WorkState:"Rajasthan",
         Contact:"+91-98731243388",
-        verified: true
+        verified: false
     },
     {
         id:8,

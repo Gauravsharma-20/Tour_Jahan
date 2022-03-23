@@ -5,11 +5,67 @@ import {
 	StatusBar,
 	StyleSheet,
 	ImageBackground,
+	Dimensions
 } from 'react-native';
+import MapView, {Marker, Polygon} from 'react-native-maps';
+import Constants from 'expo-constants';
+import * as Location from 'expo-location';
+import * as Permissions from 'expo-permissions';
 import HeaderComponent from '../components/frequent/HeaderComponent';
 
 class FindLocation extends React.Component {
+
+	constructor(props){
+		super(props);
+		this.state={
+			errorMsg: null,
+            latitude: 30.73629,
+            longitude:  76.7884,
+            location: null,
+		}
+	}
+	async componentDidMount(){
+		let {status} = await Permissions.askAsync(Permissions.LOCATION);
+
+            if(status !== 'granted'){
+                this.setState({
+                    errorMsg: 'Permission to access location is denied!'
+                })
+            }
+
+            let location = await Location.getCurrentPositionAsync({});
+
+            this.setState({
+                location: location
+            });
+
+            if(this.state.errorMsg){
+                Alert.alert(null, this.state.errorMsg);
+                return;
+            }
+
+            var loc = JSON.parse(JSON.stringify(location));
+            this.setState({
+                latitude: loc.coords.latitude,
+                longitude: loc.coords.longitude
+            });
+	}
+
+	async setCustomLocation(e){
+		let latitude = e.nativeEvent.coordinate.latitude;
+		let longitude = e.nativeEvent.coordinate.longitude;
+		var location = {};
+		location.latitude = latitude;
+		location.longitude = longitude;
+		this.setState({
+			latitude,longitude,
+			location: location
+		});
+	}
+
 	render() {
+		let screenHeight = 2*Dimensions.get('window').height;
+
 		return (
 			<View style={styles.container}>
 				<HeaderComponent icon='globe' heading='LOCATIONS' />
@@ -25,7 +81,26 @@ class FindLocation extends React.Component {
 				>
 					<View
 						style={{ height: '100%', backgroundColor: '#00000099' }}
-					></View>
+					>
+						<MapView 
+                            region={{
+                                latitude: this.state.latitude,
+                                longitude: this.state.longitude,
+                                latitudeDelta: 0.005,
+                                longitudeDelta: 0.005
+                            }}
+							onLongPress={(e) => this.setCustomLocation(e)}
+                            style={{height: screenHeight-500, width: Dimensions.get('window').width}}
+                        >
+							<Marker 
+								coordinate={{
+									latitude: this.state.latitude,
+									longitude: this.state.longitude
+								}}
+								title={'Selected Location'}
+							/>
+						</MapView>
+					</View>
 				</ImageBackground>
 			</View>
 		);
