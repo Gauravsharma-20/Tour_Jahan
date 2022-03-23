@@ -27,24 +27,26 @@ class TicketDetail extends React.Component {
                     marginTop: '3%',
                     marginBottom: '3%'
                 }} style={{justifyContent:'center', backgroundColor: '#fff'}}>
+                  <Text style={{textAlign: 'left'}}>
+                  <Icon 
+                      name='times-circle'
+                      type='font-awesome-5' 
+                      onPress={() => {
+                        const { goBack } = this.props.navigation;
+                        goBack();
+                      }}
+                      size={20}
+                      />
+                  </Text>
                 <Card.Title style={{fontSize:20}}>{item.name}</Card.Title>
-                <Avatar containerStyle={{justifyContent:'center', alignSelf: 'center', marginBottom: 10}} size={250} source={{uri:url}}/>
-                <Text style={{fontWeight: 'bold', color: 'black', marginLeft: "10%", marginTop: "2%"}}>
-                    <Icon name='calendar' type="font-awesome-5" color='black' size={18}
-                        iconStyle={{marginRight: 10}} />
-                      Issued {new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour:'numeric', minute:'numeric'}).format(new Date(Date.parse("2022-03-22T04:58:10.539+00:00")))}
-                </Text>
+                <Avatar containerStyle={{justifyContent:'center', alignSelf: 'center', marginBottom: 20}} size={250} source={{uri:url}}/>
                 <Text style={{fontWeight: 'bold', color: 'black', marginLeft: "10%", marginTop: "2%"}}>
                     <Icon name='coins' type="font-awesome-5" color='black' size={18}
                         iconStyle={{marginRight: 10}} />Fee Paid {200}
                 </Text>
                 <Text style={{fontWeight: 'bold', color: 'black', marginLeft: "10%", marginTop: "2%"}}>
                     <Icon name='users' type="font-awesome-5" color='black' size={18}
-                        iconStyle={{marginRight: 10}} />Total Visitors {20}
-                </Text>
-                <Text style={{fontWeight: 'bold', color: 'black', marginLeft: "10%", marginTop: "2%"}}>
-                    <Icon name='users' type="font-awesome-5" color='black' size={18}
-                        iconStyle={{marginRight: 10}} />Visitors Visited {10}
+                        iconStyle={{marginRight: 10}} />Pending Visitors {10}
                 </Text>
                 <Text style={{fontWeight: 'bold', color: 'black', marginLeft: "10%", marginTop: "2%"}}>
                     <Icon name='bars' type="font-awesome-5" color='black' size={18}

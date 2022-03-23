@@ -42,17 +42,27 @@ class MyTickets extends React.Component {
           return (
           <Card containerStyle={{
               backgroundColor: '#fff',
-              borderRadius: 25, borderColor: 'grey', borderWidth: 2, marginHorizontal: '3%', 
+              borderRadius: 12, borderColor: 'grey', borderWidth: 2, marginHorizontal: '3%', 
               marginTop: '3%'
           }} style={{justifyContent:'center'}}>
             <Card.Title>{ticket.name}</Card.Title>
             <Card.Image
-              style={{ padding: 0 }}
+              style={{ padding: 0, marginBottom: 10 }}
               source={{
                 uri:
                   'https://www.thoughtco.com/thmb/DBOgHVGLrn4Hy6OOlJxcdExAYuE=/768x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/sunrise-at-taj-mahal--agra--uttar-pradash--india-583682538-5b91840bc9e77c0050bdc67b.jpg',
               }}
             />
+            <Text style={{fontWeight: 'bold', color: 'black', marginLeft: "0%", marginTop: "2%"}}>
+                <Icon name='calendar' type="font-awesome-5" color='black' size={18}
+                    iconStyle={{marginRight: 10}} />
+                  Issued On {new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour:'numeric', minute:'numeric'}).format(new Date(Date.parse("2022-03-22T04:58:10.539+00:00")))}
+            </Text>
+            <Text style={{fontWeight: 'bold', color: 'black', marginLeft: "0%", marginTop: "2%"}}>
+                <Icon name='hourglass' type="font-awesome-5" color='black' size={18}
+                    iconStyle={{marginRight: 10}} />
+                  Expires On {new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour:'numeric', minute:'numeric'}).format(new Date(Date.parse("2022-03-22T04:58:10.539+00:00")))}
+            </Text>
             <Button
               title="VIEW"
               icon={{
@@ -73,7 +83,7 @@ class MyTickets extends React.Component {
               containerStyle={{
                 width: 200,
                 marginHorizontal: 50,
-                marginVertical: 10,
+                marginVertical: 20,
               }}
               onPress={() => this.props.navigation.navigate('TICKET DETAILS',
               {ticketDetail: ticket}
