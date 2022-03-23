@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Text, View, StatusBar, StyleSheet, ImageBackground } from 'react-native';
 import {ListItem, Icon, BottomSheet, Button, Avatar, Card} from 'react-native-elements';
+import 'intl';
+import 'intl/locale-data/jsonp/en';
 //import HeaderComponent from './frequent/HeaderComponent';
 import HeaderComponent from '../components/frequent/HeaderComponent';
 
@@ -20,38 +22,44 @@ class TicketDetail extends React.Component {
                 containerStyle={{
                     backgroundColor: '#ffffff',
                     height: "96%",
-                    borderRadius: 25, borderColor: 'grey', borderWidth: 2, marginHorizontal: '3%', 
+                    borderRadius: 10, borderColor: 'black', borderWidth: 2, marginHorizontal: '3%',
+                    borderStyle: 'dashed', 
                     marginTop: '3%',
                     marginBottom: '3%'
                 }} style={{justifyContent:'center', backgroundColor: '#fff'}}>
                 <Card.Title style={{fontSize:20}}>{item.name}</Card.Title>
-                <Avatar containerStyle={{justifyContent:'center', alignSelf: 'center', marginBottom: 20}} size={250} source={{uri:url}}/>
-                <Text style={{fontWeight: 'bold', color: '#4b778d', marginLeft: "10%", marginTop: "2%"}}>
-                    <Icon name='coins' type="font-awesome-5" color='#4b778d' size={18}
+                <Avatar containerStyle={{justifyContent:'center', alignSelf: 'center', marginBottom: 10}} size={250} source={{uri:url}}/>
+                <Text style={{fontWeight: 'bold', color: 'black', marginLeft: "10%", marginTop: "2%"}}>
+                    <Icon name='calendar' type="font-awesome-5" color='black' size={18}
+                        iconStyle={{marginRight: 10}} />
+                      Issued {new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour:'numeric', minute:'numeric'}).format(new Date(Date.parse("2022-03-22T04:58:10.539+00:00")))}
+                </Text>
+                <Text style={{fontWeight: 'bold', color: 'black', marginLeft: "10%", marginTop: "2%"}}>
+                    <Icon name='coins' type="font-awesome-5" color='black' size={18}
                         iconStyle={{marginRight: 10}} />Fee Paid {200}
                 </Text>
-                <Text style={{fontWeight: 'bold', color: '#4b778d', marginLeft: "10%", marginTop: "2%"}}>
-                    <Icon name='users' type="font-awesome-5" color='#4b778d' size={18}
+                <Text style={{fontWeight: 'bold', color: 'black', marginLeft: "10%", marginTop: "2%"}}>
+                    <Icon name='users' type="font-awesome-5" color='black' size={18}
                         iconStyle={{marginRight: 10}} />Total Visitors {20}
                 </Text>
-                <Text style={{fontWeight: 'bold', color: '#4b778d', marginLeft: "10%", marginTop: "2%"}}>
-                    <Icon name='users' type="font-awesome-5" color='#4b778d' size={18}
+                <Text style={{fontWeight: 'bold', color: 'black', marginLeft: "10%", marginTop: "2%"}}>
+                    <Icon name='users' type="font-awesome-5" color='black' size={18}
                         iconStyle={{marginRight: 10}} />Visitors Visited {10}
                 </Text>
-                <Text style={{fontWeight: 'bold', color: '#4b778d', marginLeft: "10%", marginTop: "2%"}}>
-                    <Icon name='bars' type="font-awesome-5" color='#4b778d' size={18}
+                <Text style={{fontWeight: 'bold', color: 'black', marginLeft: "10%", marginTop: "2%"}}>
+                    <Icon name='bars' type="font-awesome-5" color='black' size={18}
                         iconStyle={{marginRight: 10}} />Visitor Categories
                 </Text>
-                <Text style={{fontWeight: 'bold', color: '#4b778d', marginLeft: "15%", marginTop: "2%"}}>
-                    <Icon name='mars' type="font-awesome-5" color='#4b778d' size={18}
+                <Text style={{fontWeight: 'bold', color: 'black', marginLeft: "15%", marginTop: "2%"}}>
+                    <Icon name='mars' type="font-awesome-5" color='black' size={18}
                         iconStyle={{marginRight: 10}} />Males {5}, Females {2}, others {1}
                 </Text>
-                <Text style={{fontWeight: 'bold', color: '#4b778d', marginLeft: "15%", marginTop: "2%"}}>
-                    <Icon name='glasses' type="font-awesome-5" color='#4b778d' size={18}
+                <Text style={{fontWeight: 'bold', color: 'black', marginLeft: "15%", marginTop: "2%"}}>
+                    <Icon name='glasses' type="font-awesome-5" color='black' size={18}
                         iconStyle={{marginRight: 10}} />Children {5}, Adults {2}, Seniors {1}
                 </Text>
-                <Text style={{fontWeight: 'bold', color: '#4b778d', marginLeft: "15%", marginTop: "2%"}}>
-                    <Icon name='flag' type="font-awesome-5" color='#4b778d' size={18}
+                <Text style={{fontWeight: 'bold', color: 'black', marginLeft: "15%", marginTop: "2%"}}>
+                    <Icon name='flag' type="font-awesome-5" color='black' size={18}
                         iconStyle={{marginRight: 10}} />Local {5}, Foreigners {3}
                 </Text>
             </Card> 
@@ -64,7 +72,7 @@ class TicketDetail extends React.Component {
               <HeaderComponent icon="info" heading="TICKET DETAILS" />
               <StatusBar barStyle = "light-content" hidden = {false} backgroundColor = "#1572A1" translucent = {true}/>
               <ImageBackground source={require('../components/images/Tourist.jpeg')} style={styles.image}>
-                <View style={{height:'100%', backgroundColor: "#00000099"}}>
+                <View style={{height:'100%', backgroundColor: "#fff"}}>
                     {this.renderDetailCard(this.props.route.params.ticketDetail)}
                 </View>
               </ImageBackground>

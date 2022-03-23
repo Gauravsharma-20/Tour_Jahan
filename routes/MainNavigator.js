@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
+//import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -14,6 +15,7 @@ import TicketDetail from '../screens/TicketDetailScreen';
 import { AuthProvider } from '../hooks/useAuth';
 
 const Tab = createBottomTabNavigator();
+//const Drawer = createDrawerNavigator();
 
 const HomeNavigator = createNativeStackNavigator();
 const MyTicketsNavigator = createNativeStackNavigator();
@@ -259,6 +261,10 @@ export default function Main() {
 	return (
 		<NavigationContainer>
 			<AuthProvider>
+				{/* <Drawer.Navigator initialRouteName="Home">
+					<Drawer.Screen name="Home" component={HomeNavigatorScreen} />
+					<Drawer.Screen name="Notifications" component={MyTicketsNavigatorScreen} />
+				</Drawer.Navigator>  */}
 				<Tab.Navigator
 					initialRouteName='Home'
 					screenOptions={{ headerShown: false }}
