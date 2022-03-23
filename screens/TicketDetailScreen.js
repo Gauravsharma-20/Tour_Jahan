@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Text, View, StatusBar, StyleSheet, ImageBackground } from 'react-native';
 import {ListItem, Icon, BottomSheet, Button, Avatar, Card} from 'react-native-elements';
+import QRCode from 'react-native-qrcode-svg';
 import 'intl';
 import 'intl/locale-data/jsonp/en';
-//import HeaderComponent from './frequent/HeaderComponent';
 import HeaderComponent from '../components/frequent/HeaderComponent';
 
 class TicketDetail extends React.Component {
@@ -39,7 +39,15 @@ class TicketDetail extends React.Component {
                       />
                   </Text>
                 <Card.Title style={{fontSize:20}}>{item.name}</Card.Title>
-                <Avatar containerStyle={{justifyContent:'center', alignSelf: 'center', marginBottom: 20}} size={250} source={{uri:url}}/>
+                <View style={{alignItems: 'center', marginBottom: 20, marginTop: 20}}>
+                <QRCode
+                  value={item.name}
+                  size={220}
+                  bgColor='#000000'
+                  fgColor='#FFFFFF'
+                  
+                />
+                </View>
                 <Text style={{fontWeight: 'bold', color: 'black', marginLeft: "10%", marginTop: "2%"}}>
                     <Icon name='coins' type="font-awesome-5" color='black' size={18}
                         iconStyle={{marginRight: 10}} />Fee Paid {200}
