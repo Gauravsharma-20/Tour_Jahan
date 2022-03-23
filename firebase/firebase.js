@@ -1,8 +1,8 @@
-import {initializeApp} from "firebase/app";
-import {getAuth} from "firebase/auth";
-import {getFirestore} from "firebase/firestore";
-import {getStorage} from "firebase/storage";
-import { firebaseConfig } from "./config";
+import { initializeApp, getApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
+import { firebaseConfig } from './config';
 
 /*if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -14,6 +14,7 @@ export const firebaseSupport = firebase;*/
 
 const firebase = initializeApp(firebaseConfig);
 
+export const app = getApp();
 export const auth = getAuth(firebase);
 export const db = getFirestore(firebase);
 export const storage = getStorage(firebase);
