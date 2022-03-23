@@ -17,9 +17,6 @@ import {
 	doc,
 	getDoc,
 	setDoc,
-	updateDoc,
-	arrayUnion,
-	arrayRemove,
 } from 'firebase/firestore';
 
 const AuthContext = createContext({});

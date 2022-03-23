@@ -14,6 +14,7 @@ import FindLocationScreen from '../screens/LocationScreen';
 import useAuth, { AuthProvider } from '../hooks/useAuth';
 import IntroScreen from '../screens/IntroScreen';
 import TicketDetail from '../screens/TicketDetailScreen';
+import BookingDetail from '../screens/HomeTicketScreen';
 
 const Tab = createBottomTabNavigator();
 //const Drawer = createDrawerNavigator();
@@ -68,6 +69,11 @@ function HomeNavigatorScreen() {
 					}))
 				}
 			/>
+			<HomeNavigator.Screen
+                name="BOOKING DETAILS"
+                component={BookingDetail}
+                options= {{ headerTitle: "BOOKING DETAILS", headerTitleStyle: {textAlign: 'left', fontWeight: 'bold'}}}
+            />
 		</HomeNavigator.Navigator>
 	);
 }
