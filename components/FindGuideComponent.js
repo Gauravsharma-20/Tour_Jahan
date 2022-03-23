@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Text, View, StatusBar, StyleSheet, ImageBackground } from 'react-native';
+import { Text, View, StatusBar, StyleSheet, ImageBackground, ScrollView } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements';
 import TouchableScale from 'react-native-touchable-scale';
 import HeaderComponent from './frequent/HeaderComponent';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconFeather from 'react-native-vector-icons/Feather';
-import {guideData} from '../data';
+import {guideData} from '../data/guideData';
 
 class FindGuide extends React.Component {
     renderListItem = (item) => {
@@ -17,24 +17,21 @@ class FindGuide extends React.Component {
         }}
 
         >
-          <Avatar rounded source={item.avatar_url?{uri:"https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg"}:{uri:"https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg"}} size={50}/>
+          <Avatar rounded source={item.imageUrl?{uri:item.imageUrl}:{uri:"https://i.pinimg.com/originals/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg"}} size={50}/>
             <ListItem.Content>
               <ListItem.Title style={{ color: 'black', fontWeight: 'bold' }}>
-                {item.name}
+                {item.Name}
               </ListItem.Title>
-              <ListItem.Subtitle style={{ color: 'black' }}>
-                {item.description}
-              </ListItem.Subtitle>
               <Text style={{ color: 'red', marginBottom:'1%', marginTop:'1%'}}>
                 <IconEntypo name="location-pin" size={20} style={{marginTop:'10%'}}/>
-                  <Text style={{paddingBottom:'50%'}}>{item.location}</Text>
+                  <Text style={{paddingBottom:'50%'}}>{item.WorkCity + ", " + item.WorkState}</Text>
               </Text>
               <Text style={{ color: 'red', marginBottom:'1%', marginTop:'1%'}}>
                 <IconFeather name="phone-call" size={20} style={{marginTop:'10%'}}/>
-                  <Text style={{paddingBottom:'50%'}}>{item.contact}</Text>
+                  <Text style={{paddingBottom:'50%'}}>{item.Contact}</Text>
               </Text>
             </ListItem.Content>
-            {/* <ListItem.Chevron color="green" /> */}
+            
         </ListItem>
       )
     
@@ -55,10 +52,12 @@ class FindGuide extends React.Component {
               <HeaderComponent icon="user-tie" heading="GUIDES" />
               <StatusBar barStyle = "light-content" hidden = {false} backgroundColor = "#1572A1" translucent = {true}/>
               <ImageBackground source={require('./images/Tourist.jpeg')} style={styles.image}>
-                <View style={{height:'100%', backgroundColor: "#00000099"}}>
+                <ScrollView style={{height:'100%', backgroundColor: "#00000099"}}>
+                
                   {this.renderGuideData(guideData)}
 
-                </View>
+                
+                </ScrollView>
               </ImageBackground>
             </View>
           );
