@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "330320256587",
+    "project_id": "tourjahan1",
+    "storage_bucket": "tourjahan1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:330320256587:android:82643685c84048aba277ce",
+        "android_client_info": {
+          "package_name": "host.exp.exponent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "330320256587-9622t18o5g1blcpdostj5gdi2uurdmol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWH0mVGrmJ6ZSrvQ_lXtsRMP4rlm44hIY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "330320256587-9622t18o5g1blcpdostj5gdi2uurdmol.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
