@@ -3,8 +3,6 @@ import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { RootSiblingParent } from 'react-native-root-siblings';
-//import { createStackNavigator } from '@react-navigation/stack';
 import { Image } from 'react-native';
 import { Icon } from 'react-native-elements';
 import HomeScreen from '../screens/HomeScreen';
@@ -14,6 +12,7 @@ import FindGuideScreen from '../screens/GuideScreen';
 import FindLocationScreen from '../screens/LocationScreen';
 import useAuth, { AuthProvider } from '../hooks/useAuth';
 import IntroScreen from '../screens/IntroScreen';
+import TicketDetail from '../screens/TicketDetailScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -47,12 +46,13 @@ function HomeNavigatorScreen() {
 				options={
 					({ headerTitle: 'My Profile' },
 					({ navigation }) => ({
-						headerRight: () => (
+						/*headerRight: () => (
 							<Image
-								source={require('../components/images/Logo.png')}
+								source={require('./images/Logo.png')}
 								style={{ width: 75, height: 75 }}
 							/>
-						),
+
+						),*/
 						headerLeft: () => (
 							<Icon
 								name='user-alt'
@@ -71,50 +71,51 @@ function HomeNavigatorScreen() {
 }
 
 function MyTicketsNavigatorScreen() {
-	return (
-		<MyTicketsNavigator.Navigator
-			screenOptions={{
-				headerStyle: {
-					backgroundColor: '#03045E',
-					headerShown: false,
-				},
-				headerTintColor: '#fff',
-				headerTitleStyle: {
-					color: '#fff',
-					textAlign: 'center',
-					fontWeight: 'bold',
-					fontSize: 15,
-				},
-				headerShown: false,
-			}}
-		>
-			<MyTicketsNavigator.Screen
-				name='HOME'
-				component={MyTicketsScreen}
-				options={
-					({ headerTitle: 'My Profile' },
-					({ navigation }) => ({
-						headerRight: () => (
-							<Image
-								source={require('../components/images/Logo.png')}
-								style={{ width: 75, height: 75 }}
-							/>
-						),
-						headerLeft: () => (
-							<Icon
-								name='user-alt'
-								type='font-awesome-5'
-								size={24}
-								color='white'
-								iconStyle={{ marginRight: 10 }}
-								onPress={() => navigation.toggleDrawer()}
-							/>
-						),
-					}))
-				}
-			/>
-		</MyTicketsNavigator.Navigator>
-	);
+  return(
+      <MyTicketsNavigator.Navigator
+          screenOptions={{
+              headerStyle: {
+                  backgroundColor: "#03045E",
+                  headerShown: false
+              },
+              headerTintColor: "#fff",
+              headerTitleStyle: {
+                  color: "#fff"  ,
+                  textAlign: 'center',
+                  fontWeight: "bold",
+                  fontSize: 15                    
+              },
+              headerShown: false
+          }}
+      >
+          <MyTicketsNavigator.Screen
+              name="HOME"
+              component={MyTicketsScreen}
+              options={{headerTitle: "My Profile"},({navigation}) => ({
+                  /*headerRight: () => (
+                      <Image source={require('./images/Logo.png')} style={{width: 75, height: 75}}/>
+                  ),*/
+                  headerLeft: () => (
+                      <Icon 
+                          name='user-alt'
+                          type="font-awesome-5" 
+                          size={24}
+                          color='white'
+                          iconStyle={{marginRight: 10}}
+                          onPress={() => 
+                              navigation.toggleDrawer()}
+                      />
+                  )
+              })}
+          />
+          <MyTicketsNavigator.Screen
+                name="TICKET DETAILS"
+                component={TicketDetail}
+                options= {{ headerTitle: "TICKET DETAILS", headerTitleStyle: {textAlign: 'left', fontWeight: 'bold'}}}
+            />
+
+      </MyTicketsNavigator.Navigator>
+  );
 }
 
 function AddReviewNavigatorScreen() {
@@ -140,12 +141,12 @@ function AddReviewNavigatorScreen() {
 				options={
 					({ headerTitle: 'My Profile' },
 					({ navigation }) => ({
-						headerRight: () => (
+						/*headerRight: () => (
 							<Image
-								source={require('../components/images/Logo.png')}
+								source={require('./images/Logo.png')}
 								style={{ width: 75, height: 75 }}
 							/>
-						),
+						),*/
 						headerLeft: () => (
 							<Icon
 								name='user-alt'
@@ -186,12 +187,12 @@ function FindGuideNavigatorScreen() {
 				options={
 					({ headerTitle: 'My Profile' },
 					({ navigation }) => ({
-						headerRight: () => (
+						/*headerRight: () => (
 							<Image
-								source={require('../components/images/Logo.png')}
+								source={require('./images/Logo.png')}
 								style={{ width: 75, height: 75 }}
 							/>
-						),
+						),*/
 						headerLeft: () => (
 							<Icon
 								name='user-alt'
@@ -232,12 +233,12 @@ function FindLocationNavigatorScreen() {
 				options={
 					({ headerTitle: 'My Profile' },
 					({ navigation }) => ({
-						headerRight: () => (
+						/*headerRight: () => (
 							<Image
-								source={require('../components/images/Logo.png')}
+								source={require('./images/Logo.png')}
 								style={{ width: 75, height: 75 }}
 							/>
-						),
+						),*/
 						headerLeft: () => (
 							<Icon
 								name='user-alt'
