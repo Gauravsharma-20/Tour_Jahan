@@ -5,7 +5,8 @@ import {
 	StatusBar,
 	StyleSheet,
 	ImageBackground,
-	Dimensions
+	Dimensions,
+	Alert
 } from 'react-native';
 import MapView, {Marker, Polygon} from 'react-native-maps';
 import Constants from 'expo-constants';
@@ -19,11 +20,13 @@ class FindLocation extends React.Component {
 		super(props);
 		this.state={
 			errorMsg: null,
-            latitude: 30.73629,
-            longitude:  76.7884,
+            latitude: 28.6119,
+            longitude:  77.2193,
             location: null,
+			locationAddress: null
 		}
 	}
+	
 	async componentDidMount(){
 		let {status} = await Permissions.askAsync(Permissions.LOCATION);
 
@@ -49,6 +52,16 @@ class FindLocation extends React.Component {
                 latitude: loc.coords.latitude,
                 longitude: loc.coords.longitude
             });
+
+			try {
+				let locationAddress = await Location.reverseGeocodeAsync({"latitude": this.state.latitude, "longitude": this.state.longitude})
+				this.setState({
+					locationAddress: locationAddress[0]
+				});
+
+			} catch (error) {
+				Alert.alert(null, "Couldn't process location!");
+			}
 	}
 
 	async setCustomLocation(e){
@@ -61,6 +74,16 @@ class FindLocation extends React.Component {
 			latitude,longitude,
 			location: location
 		});
+
+		try {
+			let locationAddress = await Location.reverseGeocodeAsync({"latitude": this.state.latitude, "longitude": this.state.longitude})
+			this.setState({
+				locationAddress: locationAddress[0]
+			});
+
+		} catch (error) {
+			Alert.alert(null, "Couldn't process location!");
+		}
 	}
 
 	render() {
