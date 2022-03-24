@@ -530,7 +530,7 @@ class BookingDetail extends React.Component {
 						style={{
 							fontWeight: 'bold',
 							color: 'black',
-							marginLeft: '10%',
+							marginLeft: '20%',
 							marginTop: '2%',
 							fontSize: 25,
 						}}
