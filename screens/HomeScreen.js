@@ -231,12 +231,12 @@ class Home extends React.Component {
 					backgroundColor='#1572A1'
 					translucent={true}
 				/>
-				<ImageBackground
+				{/* <ImageBackground
 					source={require('../components/images/Tourist.jpeg')}
 					style={styles.image}
-				>
+				> */}
 					<View
-						style={{ height: '100%', backgroundColor: '#00000099' }}
+						style={{ height: '100%', backgroundColor: 'white' }}
 					>
 						<SearchBar
                             placeholder="Search Site by Names, Citiies..."
@@ -250,6 +250,7 @@ class Home extends React.Component {
                             round
                             clear
                             lightTheme
+							// style={{ backgroundColor: 'white' }}
                         />
 						<ScrollView style={styles.scrollView} >
 							<View style={{ marginBottom: 30 }}>
@@ -257,7 +258,7 @@ class Home extends React.Component {
 							</View>
 						</ScrollView>
 					</View>
-				</ImageBackground>
+				{/* </ImageBackground> */}
 			</View>
 		);
 	}
@@ -267,6 +268,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		flexDirection: 'column',
+		backgroundColor: 'white',
 	},
 	image: {
 		flex: 1,
@@ -304,7 +306,7 @@ const styles = StyleSheet.create({
 	},
 	scrollView: {
 		flex: 1,
-		backgroundColor: '#00000099',
+		backgroundColor: 'white',
 	},
 });
 
