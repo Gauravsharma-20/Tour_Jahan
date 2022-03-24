@@ -39,6 +39,7 @@
     "react-native-maps": "0.29.4",
     "react-native-pager-view": "5.4.9",
     "react-native-qrcode-svg": "^6.1.2",
+    "react-native-razorpay": "^2.2.8",
     "react-native-reanimated": "^2.5.0",
     "react-native-root-siblings": "^4.1.1",
     "react-native-safe-area-context": "3.3.2",

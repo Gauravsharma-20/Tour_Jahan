@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { Text, View, StatusBar, StyleSheet, ImageBackground, ScrollView } from 'react-native';
-import { ListItem, Avatar } from 'react-native-elements';
+import { ListItem, Avatar, Button } from 'react-native-elements';
 import TouchableScale from 'react-native-touchable-scale';
 import HeaderComponent from './frequent/HeaderComponent';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconFeather from 'react-native-vector-icons/Feather';
 import {guideData} from '../data/guideData';
+import {_onPaymentPress} from './payments/make_payment';
 
 class FindGuide extends React.Component {
     renderListItem = (item) => {
@@ -45,6 +46,19 @@ class FindGuide extends React.Component {
       )
     }
 
+    handlePayment = async() => {
+      const payment = await _onPaymentPress(100, "Amit", "hello@gmail.com", "1234567890");
+      if(payment.success){
+        alert("Payment Successful");
+      }
+      else{
+        alert(payment.error);
+      }
+
+    }
+
+
+
 
     render(){
         return (
@@ -53,10 +67,13 @@ class FindGuide extends React.Component {
               <StatusBar barStyle = "light-content" hidden = {false} backgroundColor = "#1572A1" translucent = {true}/>
               <ImageBackground source={require('./images/Tourist.jpeg')} style={styles.image}>
                 <ScrollView style={{height:'100%', backgroundColor: "#00000099"}}>
+                 
                 
                   {this.renderGuideData(guideData)}
 
-                
+                  <View>
+                    <Button onPress={this.handlePayment} title="Press Me"/>
+                  </View>
                 </ScrollView>
               </ImageBackground>
             </View>
