@@ -12,6 +12,7 @@ import {
 import HeaderComponent from '../components/frequent/HeaderComponent';
 import { sitesData } from '../data/sitesData';
 import symbolicateStackTrace from 'react-native/Libraries/Core/Devtools/symbolicateStackTrace';
+import { doc } from 'firebase/firestore';
 // import { collection, addDoc } from "firebase/firestore";
 // import { db } from '../firebase/firebase';
 
@@ -52,7 +53,6 @@ class Home extends React.Component {
             });
         }
         else if(searchFilter.length >= 2){
-			//console.log("hello")
 			const newData = this.arrayHolder.filter(item => {
 				const itemData = `${item.name.toUpperCase()}`;
 				const textData = searchFilter.toUpperCase();
@@ -63,14 +63,6 @@ class Home extends React.Component {
 			  this.setState({
 				sites: newData,
 			  })
-            /*await this.props.searchSpecie(birdFilter);
-
-            let birds = this.props.species.species;
-
-            this.setState({
-                birds: birds,
-                searchErr: ''
-            });*/
         }
     };
 
@@ -81,6 +73,8 @@ class Home extends React.Component {
 
 			for(let i=0;i<site.RequiredDocuments.length;i++)
 				docs += site.RequiredDocuments[i]+", ";
+			docs = docs.slice(0, docs.length-2);
+
 			return (
 				<Card
 					containerStyle={{

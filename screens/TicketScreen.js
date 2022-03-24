@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, StatusBar, StyleSheet, ImageBackground, Text } from 'react-native';
-import { Button, ListItem, Avatar, Icon, Card } from 'react-native-elements';
+import { Button, ListItem, Avatar, Icon, Card, SearchBar } from 'react-native-elements';
 //import HeaderComponent from './frequent/HeaderComponent';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconFeather from 'react-native-vector-icons/Feather';
@@ -20,8 +20,10 @@ class MyTickets extends React.Component {
 
       super(props);
       this.state={
-        
+          searchFilter: '',
+          sites: []
       }
+      this.arrayHolder = [];
     }
 
     async componentDidMount(){
@@ -36,6 +38,31 @@ class MyTickets extends React.Component {
       }
 
     }
+
+    updateSearch = async (searchFilter) => {
+
+      this.setState({ searchFilter });
+
+      if(searchFilter.length< 3){
+
+          this.setState({
+              sites: [],
+              searchErr: '*Enter atleast 3 characters to begin search.'
+          });
+      }
+      else if(searchFilter.length >= 2){
+    const newData = this.arrayHolder.filter(item => {
+      const itemData = `${item.name.toUpperCase()}`;
+      const textData = searchFilter.toUpperCase();
+  
+      return itemData.indexOf(textData) > -1;
+    });
+  
+      this.setState({
+      sites: newData,
+      })
+      }
+  };
 
     renderTicketData = (sitesData) => {
       return(
@@ -102,6 +129,19 @@ class MyTickets extends React.Component {
               <StatusBar barStyle = "light-content" hidden = {false} backgroundColor = "#1572A1" translucent = {true}/>
               <ImageBackground source={require('../components/images/Tourist.jpeg')} style={styles.image}>
                 <View style={{height:'100%', backgroundColor: "#00000099"}}>
+                  <SearchBar
+                        placeholder="Search Tickets by Names, Dates..."
+                        onChangeText={this.updateSearch}
+                        onClear={() => this.setState({
+                            birds: []
+                        })}
+                        value={this.state.searchFilter}
+                        clearIcon={{size: 20}}
+                        searchIcon={{size: 25}}
+                        round
+                        clear
+                        lightTheme
+                    />
                   <ScrollView style={styles.scrollView}>
                     <View style={{marginBottom: 30}}>
                       {this.renderTicketData(sitesData)} 
@@ -158,7 +198,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     
-    marginTop: 20
+    marginTop: 0
   },
   ticketCard: {
     borderRadius: 20
@@ -168,131 +208,3 @@ const styles = StyleSheet.create({
 export default MyTickets;
 
 
-{/*<ListItem
-            key={item.id}
-            containerStyle={{
-                backgroundColor: '#ffffff',
-                height: 100, borderRadius: 25, borderColor: 'grey', borderWidth: 2, marginHorizontal: '3%', 
-                marginTop: '3%'}}
-            pad = {30}
-        >   
-            <Avatar rounded size={'large'} source={item.avatar_url?{uri:"https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg"}:{uri:"https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg"}} />
-            <ListItem.Content>
-                <ListItem.Title style={{fontWeight: 'bold', color: 'red'}}>
-                    <Icon name='feather'
-                                type="font-awesome-5" 
-                                color='red'
-                                size={15}
-                                iconStyle={{marginRight: 10}} />{item.name}
-                </ListItem.Title>
-                <ListItem.Subtitle style={{fontWeight: 'bold', color: 'red'}}>
-                    <Icon name='eye'
-                        type="font-awesome-5" 
-                        color='red'
-                        size={15}
-                        iconStyle={{marginRight: 10}} />Average Sightings -- {item.location}
-                </ListItem.Subtitle>
-                <QRCode
-                  value={item.name}
-                  size={60}
-                />
-            </ListItem.Content>
-            </ListItem>*/}
-
-
-
-
-          //   <Card containerStyle={{
-          //     backgroundColor: '#fff',
-          //     borderRadius: 25, borderColor: 'grey', borderWidth: 2, marginHorizontal: '3%', 
-          //     marginTop: '3%'
-          // }} style={{justifyContent:'center'}}>
-          //   <Card.Title>HELLO WORLD</Card.Title>
-          //   <Card.Image
-          //     style={{ padding: 0 }}
-          //     source={{
-          //       uri:
-          //         'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
-          //     }}
-          //   />
-          //   <Button
-          //     title="VIEW"
-          //     icon={{
-          //       name: 'arrow-right',
-          //       type: 'font-awesome',
-          //       size: 15,
-          //       color: 'white',
-          //     }}
-          //     iconRight
-          //     iconContainerStyle={{ marginLeft: 10 }}
-          //     titleStyle={{ fontWeight: '700' }}
-          //     buttonStyle={{
-          //       backgroundColor: 'rgba(199, 43, 98, 1)',
-          //       borderColor: 'transparent',
-          //       borderWidth: 0,
-          //       borderRadius: 30,
-          //     }}
-          //     containerStyle={{
-          //       width: 200,
-          //       marginHorizontal: 50,
-          //       marginVertical: 10,
-          //     }}
-          //   />
-          // </Card>
-          // <CardEcomOne
-          //   title={"NIKE SILVER"}
-          //   price={"$200"}
-          //   image={{
-          //     uri:
-          //       "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-          //   }}
-          //   icon={"star"}
-          //   nbStar={3}
-          //   /*iconColor={"#FFC57C"}
-          //   colorList={["#000000", "#0b8457", "#7ed3b2"]}
-          //   selectColor={"#000000"}
-          //   getSelectColor={color => alert(color)}*/
-          
-          // />
-          // <CardEcomOne
-          //   title={"NIKE SILVER"}
-          //   price={"$200"}
-          //   image={{
-          //     uri:
-          //       "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-          //   }}
-          //   icon={"star"}
-          //   nbStar={3}
-          //   iconColor={"#FFC57C"}
-          //   colorList={["#000000", "#0b8457", "#7ed3b2"]}
-          //   selectColor={"#000000"}
-          //   getSelectColor={color => alert(color)}
-          // />
-          // <CardEcomOne
-          //   title={"NIKE SILVER"}
-          //   price={"$200"}
-          //   image={{
-          //     uri:
-          //       "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-          //   }}
-          //   icon={"star"}
-          //   nbStar={3}
-          //   iconColor={"#FFC57C"}
-          //   colorList={["#000000", "#0b8457", "#7ed3b2"]}
-          //   selectColor={"#000000"}
-          //   getSelectColor={color => alert(color)}
-          // />
-          // <CardEcomOne
-          //   title={"NIKE SILVER"}
-          //   price={"$200"}
-          //   image={{
-          //     uri:
-          //       "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-          //   }}
-          //   icon={"star"}
-          //   nbStar={3}
-          //   iconColor={"#FFC57C"}
-          //   colorList={["#000000", "#0b8457", "#7ed3b2"]}
-          //   selectColor={"#000000"}
-          //   getSelectColor={color => alert(color)}
-          // />
