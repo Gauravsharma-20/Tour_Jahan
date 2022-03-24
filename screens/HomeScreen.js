@@ -188,7 +188,7 @@ class Home extends React.Component {
 						}}
 					>
 						<Icon
-							name='file'
+							name='id-card'
 							type='font-awesome-5'
 							color='black'
 							size={18}
