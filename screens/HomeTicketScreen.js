@@ -85,7 +85,7 @@ class BookingDetail extends React.Component {
 				Foreigner: 0,
 				Local: 0,
 			},
-			price: 50,
+			price: 0,
 		};
 	}
 
@@ -116,7 +116,7 @@ class BookingDetail extends React.Component {
 			<Card
 				key={item.id}
 				containerStyle={{
-					backgroundColor: '#ffffff',
+					backgroundColor: '#f3f4f4',
 					height: '96%',
 					borderRadius: 10,
 					borderColor: 'black',
@@ -125,21 +125,34 @@ class BookingDetail extends React.Component {
 					borderStyle: 'dashed',
 					marginTop: '3%',
 					marginBottom: '3%',
+					// paddingTop: 0,
 				}}
-				style={{ justifyContent: 'center', backgroundColor: '#fff' }}
+				style={{ justifyContent: 'center', backgroundColor: '#f3f4f4' }}
 			>
-				<Text style={{ textAlign: 'left' }}>
-					<Icon
-						name='times-circle'
-						type='font-awesome-5'
-						onPress={() => {
-							const { goBack } = this.props.navigation;
-							goBack();
+				<View style={{ display: 'flex', flexDirection: 'row' }}>
+					<Text
+						style={{ textAlign: 'left', padding: 0, width: '5%' }}
+					>
+						<Icon
+							name='times-circle'
+							type='font-awesome-5'
+							onPress={() => {
+								const { goBack } = this.props.navigation;
+								goBack();
+							}}
+							size={20}
+						/>
+					</Text>
+					<Card.Title
+						style={{
+							fontSize: 20,
+							width: '95%',
+							textAlign: 'center',
 						}}
-						size={20}
-					/>
-				</Text>
-				<Card.Title style={{ fontSize: 20 }}>{item.Name}</Card.Title>
+					>
+						{item.Name}
+					</Card.Title>
+				</View>
 				<Avatar
 					containerStyle={{
 						justifyContent: 'center',
@@ -158,7 +171,7 @@ class BookingDetail extends React.Component {
 						fontSize: 20,
 					}}
 				>
-					AgeCategory
+					Age Category
 				</Text>
 				{Object.entries(this.state.data.AgeCategory).map(
 					([key, value]) => (
@@ -178,6 +191,7 @@ class BookingDetail extends React.Component {
 									color: 'black',
 									marginLeft: '10%',
 									marginTop: '2%',
+									fontSize: 17,
 								}}
 							>
 								{key}
@@ -199,7 +213,7 @@ class BookingDetail extends React.Component {
 								onDecrease={(decreased) => {
 									var tempPrice = this.state.price;
 									tempPrice -=
-										this.state.data.AgeCategory[key];
+										(this.state.data.AgeCategory[key] + this.state.BaseFees);
 									this.setState({
 										price: tempPrice,
 									});
@@ -207,7 +221,7 @@ class BookingDetail extends React.Component {
 								onIncrease={(increased) => {
 									var tempPrice = this.state.price;
 									tempPrice +=
-										this.state.data.AgeCategory[key];
+										(this.state.data.AgeCategory[key] + this.state.BaseFees);
 									this.setState({
 										price: tempPrice,
 									});
@@ -315,6 +329,7 @@ class BookingDetail extends React.Component {
 								color: 'black',
 								marginLeft: '10%',
 								marginTop: '2%',
+								fontSize: 17,
 							}}
 						>
 							{key}
@@ -335,16 +350,14 @@ class BookingDetail extends React.Component {
 							}}
 							onDecrease={(decreased) => {
 								var tempPrice = this.state.price;
-								tempPrice -=
-									this.state.data.Gender[key];
+								tempPrice -= (this.state.data.Gender[key] + this.state.BaseFees);
 								this.setState({
 									price: tempPrice,
 								});
 							}}
 							onIncrease={(increased) => {
 								var tempPrice = this.state.price;
-								tempPrice +=
-									this.state.data.Gender[key];
+								tempPrice += (this.state.data.Gender[key] + this.state.BaseFees);
 								this.setState({
 									price: tempPrice,
 								});
@@ -383,6 +396,7 @@ class BookingDetail extends React.Component {
 									color: 'black',
 									marginLeft: '10%',
 									marginTop: '2%',
+									fontSize: 17,
 								}}
 							>
 								{key}
@@ -404,7 +418,7 @@ class BookingDetail extends React.Component {
 								onDecrease={(decreased) => {
 									var tempPrice = this.state.price;
 									tempPrice -=
-										this.state.data.Nationality[key];
+										(this.state.data.Nationality[key] + this.state.BaseFees);
 									this.setState({
 										price: tempPrice,
 									});
@@ -412,7 +426,7 @@ class BookingDetail extends React.Component {
 								onIncrease={(increased) => {
 									var tempPrice = this.state.price;
 									tempPrice +=
-										this.state.data.Nationality[key];
+										(this.state.data.Nationality[key] + this.state.BaseFees);
 									this.setState({
 										price: tempPrice,
 									});
@@ -546,7 +560,10 @@ class BookingDetail extends React.Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<HeaderComponent icon='info' heading='BOOKING DETAILS' />
+				<HeaderComponent
+					icon='map-marker-alt'
+					heading='BOOKING DETAILS'
+				/>
 				<StatusBar
 					barStyle='light-content'
 					hidden={false}
@@ -559,7 +576,7 @@ class BookingDetail extends React.Component {
 				>
 					<ScrollView style={styles.scrollView}>
 						<View
-							style={{ height: '100%', backgroundColor: '#fff' }}
+							style={{ height: '100%', backgroundColor: 'white' }}
 						>
 							{this.renderDetailCard(
 								this.props.route.params.siteDetail
@@ -613,7 +630,7 @@ const styles = StyleSheet.create({
 	},
 	scrollView: {
 		flex: 1,
-		backgroundColor: '#00000099',
+		backgroundColor: 'white',
 	},
 });
 

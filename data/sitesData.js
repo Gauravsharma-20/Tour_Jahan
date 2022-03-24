@@ -3,8 +3,8 @@ export const sitesData = [
         id: 'YTN2R7w3ekZBxqReqCBN',
         City: "Agra",
         Description:"The Taj Mahal, is an ivory-white marble mausoleum on the right bank of the river Yamuna in the Indian city of Agra.",
-        EntryTime:"",
-        ExitTime:"",
+        EntryTime:"11:30 AM",
+        ExitTime:"8:30 PM",
         ImageUrl:[
             "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Taj_Mahal%2C_Agra%2C_India_edit3.jpg/375px-Taj_Mahal%2C_Agra%2C_India_edit3.jpg", 
             "https://www.deccanherald.com/sites/dh/files/styles/article_detail/public/articleimages/2021/07/06/pti06222021000109b-1-1005675-1625594887.jpg?itok=Phvq6zxp"
@@ -17,8 +17,8 @@ export const sitesData = [
         id:2,
         City: "Delhi",
         Description:"he Red Fort or Lal Qila is a historic fort in Old Delhi, Delhi in India that served as the main residence of the Mughal Emperors. Emperor Shah Jahan commissioned construction of the Red Fort on 12 May 1638, when he decided to shift his capital from Agra to Delhi.",
-        EntryTime:"2021-02-05T04:43:01.473+00:00",
-        ExitTime:"2021-02-05T04:43:01.473+00:00",
+        EntryTime:"10:30 AM",
+        ExitTime:"5:30 PM",
         ImageUrl:[
             "https://assets-news.housing.com/news/wp-content/uploads/2021/07/20184714/All-about-the-Delhi-Red-Fort-or-Lal-Kila-FB-1200x700-compressed-2.jpg",
             "https://img.traveltriangle.com/blog/wp-content/uploads/2019/06/Red-Fort-cover.jpg"

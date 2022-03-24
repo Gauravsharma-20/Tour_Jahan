@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { Button, ListItem, Avatar, Icon, Card, Input, SearchBar } from 'react-native-elements';
+import {
+	Button,
+	ListItem,
+	Avatar,
+	Icon,
+	Card,
+	Input,
+	SearchBar,
+} from 'react-native-elements';
 import {
 	Text,
 	View,
@@ -30,58 +38,53 @@ import { doc } from 'firebase/firestore';
 // }
 
 class Home extends React.Component {
-
-	constructor(props){
+	constructor(props) {
 		super(props);
 
-		this.state={
+		this.state = {
 			searchFilter: '',
-			sites: []
-		}
+			sites: [],
+		};
 		this.arrayHolder = [];
 	}
 
 	updateSearch = async (searchFilter) => {
+		this.setState({ searchFilter });
 
-        this.setState({ searchFilter });
-
-        if(searchFilter.length< 3){
-
-            this.setState({
-                sites: [],
-                searchErr: '*Enter atleast 3 characters to begin search.'
-            });
-        }
-        else if(searchFilter.length >= 2){
-			const newData = this.arrayHolder.filter(item => {
+		if (searchFilter.length < 3) {
+			this.setState({
+				sites: [],
+				searchErr: '*Enter atleast 3 characters to begin search.',
+			});
+		} else if (searchFilter.length >= 2) {
+			const newData = this.arrayHolder.filter((item) => {
 				const itemData = `${item.name.toUpperCase()}`;
 				const textData = searchFilter.toUpperCase();
-		
+
 				return itemData.indexOf(textData) > -1;
 			});
-	  
-			  this.setState({
+
+			this.setState({
 				sites: newData,
-			  })
-        }
-    };
+			});
+		}
+	};
 
 	renderTicketData = (sitesData) => {
-		
 		return sitesData.map((site) => {
-			let docs = "";
+			let docs = '';
 
-			for(let i=0;i<site.RequiredDocuments.length;i++)
-				docs += site.RequiredDocuments[i]+", ";
-			docs = docs.slice(0, docs.length-2);
+			for (let i = 0; i < site.RequiredDocuments.length; i++)
+				docs += site.RequiredDocuments[i] + ', ';
+			docs = docs.slice(0, docs.length - 2);
 
 			return (
 				<Card
 					containerStyle={{
-						backgroundColor: '#fff',
+						backgroundColor: '#f3f4f4',
 						borderRadius: 12,
-						borderColor: 'grey',
-						borderWidth: 2,
+						// borderColor: 'grey',
+						// borderWidth: 2,
 						marginHorizontal: '3%',
 						marginTop: '3%',
 					}}
@@ -90,12 +93,17 @@ class Home extends React.Component {
 				>
 					<Card.Title>{site.Name}</Card.Title>
 					<Card.Image
-						style={{ padding: 0, marginBottom: 10 }}
+						style={{
+							padding: 0,
+							marginBottom: 10,
+							borderRadius: 12,
+							height: 200,
+						}}
 						source={{
 							uri: site.ImageUrl[0],
 						}}
 					/>
-					<Text style={{marginTop: 10, marginBottom: 10}}>
+					<Text style={{ marginTop: 10, marginBottom: 10 }}>
 						{site.Description}
 					</Text>
 					<Text
@@ -113,7 +121,7 @@ class Home extends React.Component {
 							size={18}
 							iconStyle={{ marginRight: 10 }}
 						/>
-						Location {' '+site.City+', '+site.State} 
+						Location: {' ' + site.City + ', ' + site.State}
 					</Text>
 					<Text
 						style={{
@@ -130,8 +138,8 @@ class Home extends React.Component {
 							size={18}
 							iconStyle={{ marginRight: 10 }}
 						/>
-						Entry Time{' '}
-						{new Intl.DateTimeFormat('en-US', {
+						Entry:{' '}{site.EntryTime}
+						{/* {new Intl.DateTimeFormat('en-US', {
 							//day: 'numeric',
 							//month: 'long',
 							//year: 'numeric',
@@ -141,7 +149,7 @@ class Home extends React.Component {
 							new Date(
 								Date.parse('2022-03-22T04:58:10.539+00:00')
 							)
-						)}
+						)} */}
 					</Text>
 					<Text
 						style={{
@@ -158,8 +166,8 @@ class Home extends React.Component {
 							size={18}
 							iconStyle={{ marginRight: 10 }}
 						/>
-						Exit Time{' '}
-						{new Intl.DateTimeFormat('en-US', {
+						Exit:{' '}{site.ExitTime}
+						{/* {new Intl.DateTimeFormat('en-US', {
 							//day: 'numeric',
 							//month: 'long',
 							//year: 'numeric',
@@ -169,7 +177,7 @@ class Home extends React.Component {
 							new Date(
 								Date.parse('2022-03-22T04:58:10.539+00:00')
 							)
-						)}
+						)} */}
 					</Text>
 					<Text
 						style={{
@@ -186,10 +194,10 @@ class Home extends React.Component {
 							size={18}
 							iconStyle={{ marginRight: 10 }}
 						/>
-						{docs} 
+						{docs}
 					</Text>
 					<Button
-						title='BOOK TICKET'
+						title='Book Ticket'
 						icon={{
 							name: 'arrow-right',
 							type: 'font-awesome',
@@ -208,7 +216,8 @@ class Home extends React.Component {
 						containerStyle={{
 							width: 200,
 							marginHorizontal: 50,
-							marginVertical: 20,
+							marginVertical: 0,
+							marginTop: 10,
 						}}
 						onPress={() =>
 							this.props.navigation.navigate('BOOKING DETAILS', {
@@ -219,7 +228,7 @@ class Home extends React.Component {
 				</Card>
 			);
 		});
-	}
+	};
 
 	render() {
 		return (
@@ -231,34 +240,34 @@ class Home extends React.Component {
 					backgroundColor='#1572A1'
 					translucent={true}
 				/>
-				{/* <ImageBackground
+				<ImageBackground
 					source={require('../components/images/Tourist.jpeg')}
 					style={styles.image}
-				> */}
-					<View
-						style={{ height: '100%', backgroundColor: 'white' }}
-					>
-						<SearchBar
-                            placeholder="Search Site by Names, Citiies..."
-                            onChangeText={this.updateSearch}
-                            onClear={() => this.setState({
-                                birds: []
-                            })}
-                            value={this.state.searchFilter}
-                            clearIcon={{size: 20}}
-                            searchIcon={{size: 25}}
-                            round
-                            clear
-                            lightTheme
-							// style={{ backgroundColor: 'white' }}
-                        />
-						<ScrollView style={styles.scrollView} >
-							<View style={{ marginBottom: 30 }}>
-								{this.renderTicketData(sitesData)}
-							</View>
-						</ScrollView>
-					</View>
-				{/* </ImageBackground> */}
+				>
+				<View style={{ height: '100%', backgroundColor: 'white' }}>
+					<SearchBar
+						placeholder='Search Site by Names, Citiies...'
+						onChangeText={this.updateSearch}
+						onClear={() =>
+							this.setState({
+								birds: [],
+							})
+						}
+						value={this.state.searchFilter}
+						clearIcon={{ size: 20 }}
+						searchIcon={{ size: 25 }}
+						round
+						clear
+						lightTheme
+						// style={{ backgroundColor: 'white' }}
+					/>
+					<ScrollView style={styles.scrollView}>
+						<View style={{ marginBottom: 30 }}>
+							{this.renderTicketData(sitesData)}
+						</View>
+					</ScrollView>
+				</View>
+				</ImageBackground>
 			</View>
 		);
 	}
