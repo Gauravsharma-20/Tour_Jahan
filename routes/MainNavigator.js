@@ -30,12 +30,12 @@ function HomeNavigatorScreen() {
 		<HomeNavigator.Navigator
 			screenOptions={{
 				headerStyle: {
-					backgroundColor: '#03045E',
+					backgroundColor: '#000075',
 					headerShown: false,
 				},
-				headerTintColor: '#fff',
+				headerTintColor: '#000075',
 				headerTitleStyle: {
-					color: '#fff',
+					color: '#000075',
 					textAlign: 'center',
 					fontWeight: 'bold',
 					fontSize: 15,
@@ -61,7 +61,7 @@ function HomeNavigatorScreen() {
 								name='user-alt'
 								type='font-awesome-5'
 								size={24}
-								color='white'
+								color='#000075'
 								iconStyle={{ marginRight: 10 }}
 								onPress={() => navigation.toggleDrawer()}
 							/>
@@ -274,8 +274,8 @@ export default function MainNavigator() {
 			screenOptions={{ headerShown: false }}
 			tabBarOptions={{
 				initialRouteName: 'Home',
-				activeBackgroundColor: '#51C4D3',
-				inactiveBackgroundColor: '#1597BB',
+				activeBackgroundColor: '#fd7e14',
+				inactiveBackgroundColor: '#000075',
 				activeTintColor: '#fff',
 				inactiveTintColor: '#fff',
 			}}

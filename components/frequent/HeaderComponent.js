@@ -60,7 +60,7 @@ class HeaderComponent extends React.Component {
         return (
             <View>
               <Header
-                backgroundColor='#1597BB'
+                backgroundColor='white'
                 elevated
                 placement='left'
                 centerComponent={{ text: heading, style: styles.heading }}
@@ -69,12 +69,12 @@ class HeaderComponent extends React.Component {
                       name={this.props.icon}
                       type='font-awesome-5'            
                       size={24}
-                      iconStyle={{ color: "white"}}
+                      iconStyle={{ color: "#000075"}}
                     />
                 }
                 leftComponent={{
                   icon: 'menu',
-                  color: '#fff',
+                  color: '#000075',
                 }}       
               >
               </Header>
@@ -94,9 +94,11 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
   heading: {
-    color: 'white',
-    fontSize: 20,
+    color: '#fd7e14',
+    fontSize: 15,
     fontWeight: 'bold',
+    alignSelf: 'center',
+    textAlignVertical: 'center',
   },
   headerRight: {
     display: 'flex',

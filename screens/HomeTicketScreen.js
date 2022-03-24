@@ -21,6 +21,7 @@ import 'intl';
 import 'intl/locale-data/jsonp/en';
 import { Picker } from '@react-native-picker/picker';
 import HeaderComponent from '../components/frequent/HeaderComponent';
+import InputSpinner from 'react-native-input-spinner';
 
 class BookingDetail extends React.Component {
 	constructor(props) {
@@ -60,11 +61,31 @@ class BookingDetail extends React.Component {
 					Local: -10,
 				},
 			},
-			AgeCategory: 'Adult',
+			AgeCategory: {
+				Adult: 0,
+				Child: 0,
+				Senior: 0,
+			},
 			BaseFees: 50,
-			Day: 'Mon',
-			Gender: 'Male',
-			Nationality: 'Local',
+			Day: {
+				Mon: 0,
+				Tue: 0,
+				Wed: 0,
+				Thu: 0,
+				Fri: 0,
+				Sat: 0,
+				Sun: 0,
+			},
+			Gender: {
+				Female: 0,
+				Male: 0,
+				Others: 0,
+			},
+			Nationality: {
+				Foreigner: 0,
+				Local: 0,
+			},
+			price: 50,
 		};
 	}
 
@@ -132,13 +153,72 @@ class BookingDetail extends React.Component {
 					style={{
 						fontWeight: 'bold',
 						color: 'black',
-						marginLeft: '10%',
+						// marginLeft: '10%',
 						marginTop: '2%',
+						fontSize: 20,
 					}}
 				>
 					AgeCategory
 				</Text>
-				<Picker
+				{Object.entries(this.state.data.AgeCategory).map(
+					([key, value]) => (
+						<View
+							style={{
+								display: 'flex',
+								flexDirection: 'row',
+								justifyContent: 'space-between',
+								alignItems: 'center',
+								textAlignVertical: 'center',
+								marginBottom: 10,
+							}}
+						>
+							<Text
+								style={{
+									fontWeight: 'bold',
+									color: 'black',
+									marginLeft: '10%',
+									marginTop: '2%',
+								}}
+							>
+								{key}
+							</Text>
+							<InputSpinner
+								min={0}
+								max={10}
+								step={1}
+								value={this.state.AgeCategory[key]}
+								onChange={(num) => {
+									var tempState = {
+										...this.state.AgeCategory,
+									};
+									tempState[key] = num;
+									this.setState({
+										AgeCategory: tempState,
+									});
+								}}
+								onDecrease={(decreased) => {
+									var tempPrice = this.state.price;
+									tempPrice -=
+										this.state.data.AgeCategory[key];
+									this.setState({
+										price: tempPrice,
+									});
+								}}
+								onIncrease={(increased) => {
+									var tempPrice = this.state.price;
+									tempPrice +=
+										this.state.data.AgeCategory[key];
+									this.setState({
+										price: tempPrice,
+									});
+								}}
+								width={150}
+								style={{ marginRight: 10 }}
+							/>
+						</View>
+					)
+				)}
+				{/* <Picker
 					selectedValue={this.state.AgeCategory}
 					onValueChange={(itemValue, itemIndex) =>
 						this.setState({ AgeCategory: itemValue })
@@ -149,8 +229,201 @@ class BookingDetail extends React.Component {
 							<Picker.Item label={key} value={value} />
 						)
 					)}
-				</Picker>
+				</Picker> */}
 				<Text
+					style={{
+						fontWeight: 'bold',
+						color: 'black',
+						// marginLeft: '10%',
+						marginTop: '2%',
+						fontSize: 20,
+					}}
+				>
+					Day
+				</Text>
+				<Picker
+					selectedValue={this.state.Day}
+					onValueChange={(itemValue, itemIndex) =>
+						this.setState({ Day: itemValue })
+					}
+				>
+					{Object.entries(this.state.data.Day).map(([key, value]) => (
+						<Picker.Item label={key} value={value} />
+					))}
+				</Picker>
+				{/* {Object.entries(this.state.data.Day).map(
+					([key, value]) => (
+						<View
+							style={{
+								display: 'flex',
+								flexDirection: 'row',
+								justifyContent: 'space-between',
+								alignItems: 'center',
+								textAlignVertical: 'center',
+								marginBottom: 10,
+							}}
+						>
+							<Text
+								style={{
+									fontWeight: 'bold',
+									color: 'black',
+									marginLeft: '10%',
+									marginTop: '2%',
+								}}
+							>
+								{key}
+							</Text>
+							<InputSpinner
+								min={0}
+								max={10}
+								step={1}
+								value={this.state.Day[key]}
+								onChange={(num) =>
+									this.setState({ Day: num })
+								}
+								width={150}
+								style={{ marginRight: 10 }}
+							/>
+						</View>
+					)
+				)} */}
+				<Text
+					style={{
+						fontWeight: 'bold',
+						color: 'black',
+						// marginLeft: '10%',
+						marginTop: '2%',
+						fontSize: 20,
+					}}
+				>
+					Gender
+				</Text>
+				{Object.entries(this.state.data.Gender).map(([key, value]) => (
+					<View
+						style={{
+							display: 'flex',
+							flexDirection: 'row',
+							justifyContent: 'space-between',
+							alignItems: 'center',
+							textAlignVertical: 'center',
+							marginBottom: 10,
+						}}
+					>
+						<Text
+							style={{
+								fontWeight: 'bold',
+								color: 'black',
+								marginLeft: '10%',
+								marginTop: '2%',
+							}}
+						>
+							{key}
+						</Text>
+						<InputSpinner
+							min={0}
+							max={10}
+							step={1}
+							value={this.state.Gender[key]}
+							onChange={(num) => {
+								var tempState = {
+									...this.state.Gender,
+								};
+								tempState[key] = num;
+								this.setState({
+									Gender: tempState,
+								});
+							}}
+							onDecrease={(decreased) => {
+								var tempPrice = this.state.price;
+								tempPrice -=
+									this.state.data.Gender[key];
+								this.setState({
+									price: tempPrice,
+								});
+							}}
+							onIncrease={(increased) => {
+								var tempPrice = this.state.price;
+								tempPrice +=
+									this.state.data.Gender[key];
+								this.setState({
+									price: tempPrice,
+								});
+							}}
+							width={150}
+							style={{ marginRight: 10 }}
+						/>
+					</View>
+				))}
+				<Text
+					style={{
+						fontWeight: 'bold',
+						color: 'black',
+						// marginLeft: '10%',
+						marginTop: '2%',
+						fontSize: 20,
+					}}
+				>
+					Nationality
+				</Text>
+				{Object.entries(this.state.data.Nationality).map(
+					([key, value]) => (
+						<View
+							style={{
+								display: 'flex',
+								flexDirection: 'row',
+								justifyContent: 'space-between',
+								alignItems: 'center',
+								textAlignVertical: 'center',
+								marginBottom: 10,
+							}}
+						>
+							<Text
+								style={{
+									fontWeight: 'bold',
+									color: 'black',
+									marginLeft: '10%',
+									marginTop: '2%',
+								}}
+							>
+								{key}
+							</Text>
+							<InputSpinner
+								min={0}
+								max={10}
+								step={1}
+								value={this.state.Nationality[key]}
+								onChange={(num) => {
+									var tempState = {
+										...this.state.Nationality,
+									};
+									tempState[key] = num;
+									this.setState({
+										Nationality: tempState,
+									});
+								}}
+								onDecrease={(decreased) => {
+									var tempPrice = this.state.price;
+									tempPrice -=
+										this.state.data.Nationality[key];
+									this.setState({
+										price: tempPrice,
+									});
+								}}
+								onIncrease={(increased) => {
+									var tempPrice = this.state.price;
+									tempPrice +=
+										this.state.data.Nationality[key];
+									this.setState({
+										price: tempPrice,
+									});
+								}}
+								width={150}
+								style={{ marginRight: 10 }}
+							/>
+						</View>
+					)
+				)}
+				{/* <Text
 					style={{
 						fontWeight: 'bold',
 						color: 'black',
@@ -213,8 +486,16 @@ class BookingDetail extends React.Component {
 							<Picker.Item label={key} value={value} />
 						)
 					)}
-				</Picker>
-				<View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+				</Picker> */}
+				<View
+					style={{
+						display: 'flex',
+						flexDirection: 'row',
+						justifyContent: 'center',
+						alignItems: 'center',
+						margin: 20,
+					}}
+				>
 					<Text
 						style={{
 							fontWeight: 'bold',
@@ -225,10 +506,14 @@ class BookingDetail extends React.Component {
 						}}
 					>
 						Total:{' '}
-						{Object.entries(this.state)
-							.filter(([key, value]) => key !== 'data')
-							.map(([key, value]) => value)
-							.reduce((prev, next) => prev + next)}
+						{
+							// Object.entries(this.state)
+							// 	.filter(([key, value]) => key !== 'data')
+							// 	.map(([key, value]) => console.log(key, value))
+							// .map(([key, value]) => value)
+							// .reduce((prev, next) => prev + next)
+							this.state.price < 0 ? 0 : this.state.price
+						}
 					</Text>
 					<Button
 						title='GO'
