@@ -8,6 +8,7 @@ import {
 	StyleSheet,
 	ImageBackground,
 	ScrollView,
+	Alert,
 } from 'react-native';
 import {
 	ListItem,
@@ -103,6 +104,21 @@ class BookingDetail extends React.Component {
 	// 		console.log(error);
 	// 	}
 	// }
+
+	createAlert = () => {
+		Alert.alert(
+			"Ticket Confirmed",
+			"Congratulations! Your ticket is confirmed",
+			[
+				{
+					text: 'Done',
+					onPress: () => {
+						this.props.navigation.navigate('Tickets');
+					}
+				}
+			]
+		);
+	};
 
 	renderDetailCard(item) {
 		console.log(this.state);
@@ -530,9 +546,9 @@ class BookingDetail extends React.Component {
 						}
 					</Text>
 					<Button
-						title='GO'
+						title='Purchase'
 						icon={{
-							name: 'arrow-right',
+							name: 'shopping-cart',
 							type: 'font-awesome',
 							size: 15,
 							color: 'white',
@@ -547,10 +563,11 @@ class BookingDetail extends React.Component {
 							borderRadius: 30,
 						}}
 						containerStyle={{
-							width: 100,
+							width: 150,
 							marginHorizontal: 50,
 							// marginVertical: 20,
 						}}
+						onPress={this.createAlert}
 					/>
 				</View>
 			</Card>

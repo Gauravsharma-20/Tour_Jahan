@@ -6,9 +6,9 @@ import {
 	StyleSheet,
 	ImageBackground,
 	ScrollView,
-	Image
+	Image,
 } from 'react-native';
-import { ListItem, Avatar } from 'react-native-elements';
+import { ListItem, Avatar, Icon } from 'react-native-elements';
 import TouchableScale from 'react-native-touchable-scale';
 import HeaderComponent from '../components/frequent/HeaderComponent';
 import IconEntypo from 'react-native-vector-icons/Entypo';
@@ -22,8 +22,14 @@ class FindGuide extends React.Component {
 			<ListItem
 				key={item.id}
 				style={{
-					backgroundColor: '#00008B',
-					marginBottom: '3%',
+					backgroundColor: '#f3f4f4',
+					marginBottom: '0%',
+					borderRadius: 12,
+					// borderColor: 'grey',
+					// borderWidth: 1,
+					// elevation: 0.5,
+					// shadowColor: "#000000",
+					// shadowOpacity: 0.8,
 				}}
 			>
 				<Avatar
@@ -35,19 +41,55 @@ class FindGuide extends React.Component {
 									uri: 'https://i.pinimg.com/originals/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg',
 							  }
 					}
-					size={50}
+					size={75}
 				/>
 				<ListItem.Content>
 					<ListItem.Title
 						style={{ color: 'black', fontWeight: 'bold' }}
 					>
 						{item.Name}
+						{' '}
+						{item.verified ? (
+							<Icon
+								name='check-circle'
+								type='font-awesome-5'
+								color='#00acee'
+								solid={true}
+								size={14}
+								iconStyle={{ marginRight: 10 }}
+							/>
+						) : (
+							<Text></Text>
+						)}
 					</ListItem.Title>
-					<View style={{ flex:1, flexDirection: 'row', flexWrap:'wrap', alignItems:'flex-start' }}>
-						<View style={{width:"90%"}}>
+					<View
+						style={{
+							flex: 1,
+							flexDirection: 'row',
+							flexWrap: 'wrap',
+							alignItems: 'flex-start',
+						}}
+					>
+						<View style={{ width: '90%' }}>
 							<Text
 								style={{
-									color: 'red',
+									color: 'black',
+									marginBottom: '1%',
+									marginTop: '1%',
+								}}
+							>
+								<IconFeather
+									name='phone-call'
+									size={15}
+									style={{ marginTop: '10%' }}
+								/>{'  '}
+								<Text style={{ paddingBottom: '50%' }}>
+									{item.Contact}
+								</Text>
+							</Text>
+							<Text
+								style={{
+									color: 'black',
 									marginBottom: '1%',
 									marginTop: '1%',
 								}}
@@ -61,26 +103,17 @@ class FindGuide extends React.Component {
 									{item.WorkCity + ', ' + item.WorkState}
 								</Text>
 							</Text>
-							<Text
-								style={{
-									color: 'red',
-									marginBottom: '1%',
-									marginTop: '1%',
-								}}
-							>
-								<IconFeather
-									name='phone-call'
-									size={20}
-									style={{ marginTop: '10%' }}
+						</View>
+						{/* <View style={{ width: '10%' }}>
+							{item.verified ? (
+								<Image
+									source={verifyImage}
+									style={{ width: 30, height: 30 }}
 								/>
-								<Text style={{ paddingBottom: '50%' }}>
-									{item.Contact}
-								</Text>
-							</Text>
-						</View>
-						<View style={{width:"10%"}}>
-								{item.verified?<Image source={verifyImage} style={{width:30, height:30}}  />:<Text></Text>}
-						</View>
+							) : (
+								<Text></Text>
+							)}
+						</View> */}
 					</View>
 				</ListItem.Content>
 			</ListItem>
@@ -108,7 +141,7 @@ class FindGuide extends React.Component {
 					style={styles.image}
 				>
 					<ScrollView
-						style={{ height: '100%', backgroundColor: '#00000099' }}
+						style={{ height: '100%', backgroundColor: 'white' }}
 					>
 						{this.renderGuideData(guideData)}
 					</ScrollView>
@@ -159,7 +192,7 @@ const styles = StyleSheet.create({
 	},
 	scrollView: {
 		flex: 1,
-		backgroundColor: '#00000099',
+		backgroundColor: 'white',
 	},
 });
 
