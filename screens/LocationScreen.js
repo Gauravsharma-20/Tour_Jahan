@@ -12,6 +12,7 @@ import MapView, {Marker, Polygon} from 'react-native-maps';
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
+import { 	SearchBar } from 'react-native-elements';
 import HeaderComponent from '../components/frequent/HeaderComponent';
 
 class FindLocation extends React.Component {
@@ -91,7 +92,7 @@ class FindLocation extends React.Component {
 
 		return (
 			<View style={styles.container}>
-				<HeaderComponent icon='globe' heading='LOCATIONS' />
+				<HeaderComponent icon='map-marker-alt' heading='LOCATIONS' />
 				<StatusBar
 					barStyle='light-content'
 					hidden={false}
@@ -105,6 +106,23 @@ class FindLocation extends React.Component {
 					<View
 						style={{ height: '100%', backgroundColor: '#00000099' }}
 					>
+						<SearchBar
+							placeholder='Search Locations...'
+							clearIcon={{ size: 20 }}
+							searchIcon={{ size: 25 }}
+							round
+							clear
+							lightTheme
+							containerStyle={{
+								backgroundColor: 'white'
+							}}
+							inputContainerStyle={{
+								backgroundColor: '#e8e8e9',							
+							}}
+							inputStyle={{
+								color: '#6c757d',
+							}}
+						/>
 						<MapView 
                             region={{
                                 latitude: this.state.latitude,

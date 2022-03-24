@@ -64,17 +64,17 @@ class HeaderComponent extends React.Component {
                 elevated
                 placement='left'
                 centerComponent={{ text: heading, style: styles.heading }}
-                rightComponent={
+                leftComponent={
                     <Icon
                       name={this.props.icon}
                       type='font-awesome-5'            
                       size={24}
-                      iconStyle={{ color: "#000075"}}
+                      iconStyle={{ color: "#003f5a"}}
                     />
                 }
-                leftComponent={{
+                rightComponent={{
                   icon: 'menu',
-                  color: '#000075',
+                  color: '#003f5a',
                 }}       
               >
               </Header>
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
   heading: {
-    color: '#fd7e14',
+    color: '#fea02f',
     fontSize: 15,
     fontWeight: 'bold',
     alignSelf: 'center',
