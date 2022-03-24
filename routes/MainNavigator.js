@@ -274,8 +274,8 @@ export default function MainNavigator() {
 			screenOptions={{ headerShown: false }}
 			tabBarOptions={{
 				initialRouteName: 'Home',
-				activeBackgroundColor: '#fd7e14',
-				inactiveBackgroundColor: '#000075',
+				activeBackgroundColor: '#fea02f',
+				inactiveBackgroundColor: '#003f5a',
 				activeTintColor: '#fff',
 				inactiveTintColor: '#fff',
 			}}

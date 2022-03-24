@@ -259,7 +259,15 @@ class Home extends React.Component {
 						round
 						clear
 						lightTheme
-						// style={{ backgroundColor: 'white' }}
+						containerStyle={{
+							backgroundColor: 'white'
+						}}
+						inputContainerStyle={{
+							backgroundColor: '#e8e8e9',							
+						}}
+						inputStyle={{
+							color: '#6c757d',
+						}}
 					/>
 					<ScrollView style={styles.scrollView}>
 						<View style={{ marginBottom: 30 }}>

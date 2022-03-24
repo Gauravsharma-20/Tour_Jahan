@@ -12,7 +12,7 @@ class AddReview extends React.Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<HeaderComponent icon='edit' heading='REVIEWS' />
+				<HeaderComponent icon='map-marker-alt' heading='REVIEWS' />
 				<StatusBar
 					barStyle='light-content'
 					hidden={false}

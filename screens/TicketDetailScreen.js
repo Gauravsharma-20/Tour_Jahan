@@ -79,7 +79,7 @@ class TicketDetail extends React.Component {
     render(){
         return (
             <View style={styles.container}>
-              <HeaderComponent icon="info" heading="TICKET DETAILS" />
+              <HeaderComponent icon="map-marker-alt" heading="TICKET DETAILS" />
               <StatusBar barStyle = "light-content" hidden = {false} backgroundColor = "#1572A1" translucent = {true}/>
               <ImageBackground source={require('../components/images/Tourist.jpeg')} style={styles.image}>
                 <View style={{height:'100%', backgroundColor: "#fff"}}>

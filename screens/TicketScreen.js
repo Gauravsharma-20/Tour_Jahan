@@ -69,13 +69,18 @@ class MyTickets extends React.Component {
         sitesData.map((ticket)=>{
           return (
           <Card containerStyle={{
-              backgroundColor: '#fff',
-              borderRadius: 12, borderColor: 'grey', borderWidth: 2, marginHorizontal: '3%', 
+              backgroundColor: '#f3f4f4',
+              borderRadius: 12, borderWidth: 2, marginHorizontal: '3%', 
               marginTop: '3%'
           }} style={{justifyContent:'center'}}>
             <Card.Title>{ticket.Name}</Card.Title>
             <Card.Image
-              style={{ padding: 0, marginBottom: 10 }}
+              style={{
+                padding: 0,
+                marginBottom: 10,
+                borderRadius: 12,
+                height: 200,
+              }}
               source={{
                 uri:
                   ticket.ImageUrl[0]
@@ -84,19 +89,19 @@ class MyTickets extends React.Component {
             <Text style={{fontWeight: 'bold', color: 'black', marginLeft: "0%", marginTop: "2%"}}>
                 <Icon name='calendar' type="font-awesome-5" color='black' size={18}
                     iconStyle={{marginRight: 10}} />
-                  Issued On {new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour:'numeric', minute:'numeric'}).format(new Date(Date.parse("2022-03-22T04:58:10.539+00:00")))}
+                  Issued On: {new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour:'numeric', minute:'numeric'}).format(new Date(Date.parse("2022-03-22T04:58:10.539+00:00")))}
             </Text>
             <Text style={{fontWeight: 'bold', color: 'black', marginLeft: "0%", marginTop: "2%"}}>
                 <Icon name='hourglass' type="font-awesome-5" color='black' size={18}
                     iconStyle={{marginRight: 10}} />
-                  Expires On {new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour:'numeric', minute:'numeric'}).format(new Date(Date.parse("2022-03-22T04:58:10.539+00:00")))}
+                  Expires On: {new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour:'numeric', minute:'numeric'}).format(new Date(Date.parse("2022-03-23T04:58:10.539+00:00")))}
             </Text>
             <Button
-              title="VIEW"
+              title="View Ticket"
               icon={{
-                name: 'arrow-right',
+                name: 'ticket',
                 type: 'font-awesome',
-                size: 15,
+                size: 20,
                 color: 'white',
               }}
               iconRight
@@ -111,7 +116,8 @@ class MyTickets extends React.Component {
               containerStyle={{
                 width: 200,
                 marginHorizontal: 50,
-                marginVertical: 20,
+                marginVertical: 0,
+                marginTop: 10
               }}
               onPress={() => this.props.navigation.navigate('TICKET DETAILS',
               {ticketDetail: ticket}
@@ -125,23 +131,34 @@ class MyTickets extends React.Component {
     render(){
         return (
             <View style={styles.container}>
-              <HeaderComponent icon="ticket-alt" heading="TICKETS" />
+              <HeaderComponent icon="map-marker-alt" heading="TICKETS" />
               <StatusBar barStyle = "light-content" hidden = {false} backgroundColor = "#1572A1" translucent = {true}/>
               <ImageBackground source={require('../components/images/Tourist.jpeg')} style={styles.image}>
-                <View style={{height:'100%', backgroundColor: "#00000099"}}>
+                <View style={{height:'100%', backgroundColor: "#fff"}}>
                   <SearchBar
-                        placeholder="Search Tickets by Names, Dates..."
-                        onChangeText={this.updateSearch}
-                        onClear={() => this.setState({
-                            birds: []
-                        })}
-                        value={this.state.searchFilter}
-                        clearIcon={{size: 20}}
-                        searchIcon={{size: 25}}
-                        round
-                        clear
-                        lightTheme
-                    />
+                    placeholder='Search Site by Names, Citiies...'
+                    onChangeText={this.updateSearch}
+                    onClear={() =>
+                      this.setState({
+                        birds: [],
+                      })
+                    }
+                    value={this.state.searchFilter}
+                    clearIcon={{ size: 20 }}
+                    searchIcon={{ size: 25 }}
+                    round
+                    clear
+                    lightTheme
+                    containerStyle={{
+                      backgroundColor: 'white'
+                    }}
+                    inputContainerStyle={{
+                      backgroundColor: '#e8e8e9',							
+                    }}
+                    inputStyle={{
+                      color: '#6c757d',
+                    }}
+                  />
                   <ScrollView style={styles.scrollView}>
                     <View style={{marginBottom: 30}}>
                       {this.renderTicketData(sitesData)} 

@@ -96,7 +96,7 @@ class FindGuide extends React.Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<HeaderComponent icon='user-tie' heading='GUIDES' />
+				<HeaderComponent icon='map-marker-alt' heading='GUIDES' />
 				<StatusBar
 					barStyle='light-content'
 					hidden={false}
