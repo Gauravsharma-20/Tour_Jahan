@@ -38,7 +38,7 @@ class TicketDetail extends React.Component {
                       size={20}
                       />
                   </Text>
-                <Card.Title style={{fontSize:20}}>{item.name}</Card.Title>
+                <Card.Title style={{fontSize:20}}>{item.Name}</Card.Title>
                 <View style={{alignItems: 'center', marginBottom: 20, marginTop: 20}}>
                 <QRCode
                   value={item.name}

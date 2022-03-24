@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, ListItem, Avatar, Icon, Card } from 'react-native-elements';
+import { Button, ListItem, Avatar, Icon, Card, Input, SearchBar } from 'react-native-elements';
 import {
 	Text,
 	View,
@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import HeaderComponent from '../components/frequent/HeaderComponent';
 import { sitesData } from '../data/sitesData';
+import symbolicateStackTrace from 'react-native/Libraries/Core/Devtools/symbolicateStackTrace';
 // import { collection, addDoc } from "firebase/firestore";
 // import { db } from '../firebase/firebase';
 
@@ -28,8 +29,58 @@ import { sitesData } from '../data/sitesData';
 // }
 
 class Home extends React.Component {
+
+	constructor(props){
+		super(props);
+
+		this.state={
+			searchFilter: '',
+			sites: []
+		}
+		this.arrayHolder = [];
+	}
+
+	updateSearch = async (searchFilter) => {
+
+        this.setState({ searchFilter });
+
+        if(searchFilter.length< 3){
+
+            this.setState({
+                sites: [],
+                searchErr: '*Enter atleast 3 characters to begin search.'
+            });
+        }
+        else if(searchFilter.length >= 2){
+			//console.log("hello")
+			const newData = this.arrayHolder.filter(item => {
+				const itemData = `${item.name.toUpperCase()}`;
+				const textData = searchFilter.toUpperCase();
+		
+				return itemData.indexOf(textData) > -1;
+			});
+	  
+			  this.setState({
+				sites: newData,
+			  })
+            /*await this.props.searchSpecie(birdFilter);
+
+            let birds = this.props.species.species;
+
+            this.setState({
+                birds: birds,
+                searchErr: ''
+            });*/
+        }
+    };
+
 	renderTicketData = (sitesData) => {
+		
 		return sitesData.map((site) => {
+			let docs = "";
+
+			for(let i=0;i<site.RequiredDocuments.length;i++)
+				docs += site.RequiredDocuments[i]+", ";
 			return (
 				<Card
 					containerStyle={{
@@ -50,6 +101,26 @@ class Home extends React.Component {
 							uri: site.ImageUrl[0],
 						}}
 					/>
+					<Text style={{marginTop: 10, marginBottom: 10}}>
+						{site.Description}
+					</Text>
+					<Text
+						style={{
+							fontWeight: 'bold',
+							color: 'black',
+							marginLeft: '0%',
+							marginTop: '2%',
+						}}
+					>
+						<Icon
+							name='city'
+							type='font-awesome-5'
+							color='black'
+							size={18}
+							iconStyle={{ marginRight: 10 }}
+						/>
+						Location {' '+site.City+', '+site.State} 
+					</Text>
 					<Text
 						style={{
 							fontWeight: 'bold',
@@ -67,9 +138,9 @@ class Home extends React.Component {
 						/>
 						Entry Time{' '}
 						{new Intl.DateTimeFormat('en-US', {
-							day: 'numeric',
-							month: 'long',
-							year: 'numeric',
+							//day: 'numeric',
+							//month: 'long',
+							//year: 'numeric',
 							hour: 'numeric',
 							minute: 'numeric',
 						}).format(
@@ -95,9 +166,9 @@ class Home extends React.Component {
 						/>
 						Exit Time{' '}
 						{new Intl.DateTimeFormat('en-US', {
-							day: 'numeric',
-							month: 'long',
-							year: 'numeric',
+							//day: 'numeric',
+							//month: 'long',
+							//year: 'numeric',
 							hour: 'numeric',
 							minute: 'numeric',
 						}).format(
@@ -105,6 +176,23 @@ class Home extends React.Component {
 								Date.parse('2022-03-22T04:58:10.539+00:00')
 							)
 						)}
+					</Text>
+					<Text
+						style={{
+							fontWeight: 'bold',
+							color: 'black',
+							marginLeft: '0%',
+							marginTop: '2%',
+						}}
+					>
+						<Icon
+							name='file'
+							type='font-awesome-5'
+							color='black'
+							size={18}
+							iconStyle={{ marginRight: 10 }}
+						/>
+						{docs} 
 					</Text>
 					<Button
 						title='BOOK TICKET'
@@ -137,7 +225,7 @@ class Home extends React.Component {
 				</Card>
 			);
 		});
-	};
+	}
 
 	render() {
 		return (
@@ -156,7 +244,20 @@ class Home extends React.Component {
 					<View
 						style={{ height: '100%', backgroundColor: '#00000099' }}
 					>
-						<ScrollView style={styles.scrollView}>
+						<SearchBar
+                            placeholder="Search Site by Names, Citiies..."
+                            onChangeText={this.updateSearch}
+                            onClear={() => this.setState({
+                                birds: []
+                            })}
+                            value={this.state.searchFilter}
+                            clearIcon={{size: 20}}
+                            searchIcon={{size: 25}}
+                            round
+                            clear
+                            lightTheme
+                        />
+						<ScrollView style={styles.scrollView} >
 							<View style={{ marginBottom: 30 }}>
 								{this.renderTicketData(sitesData)}
 							</View>

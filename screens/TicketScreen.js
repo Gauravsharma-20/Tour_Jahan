@@ -6,6 +6,7 @@ import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconFeather from 'react-native-vector-icons/Feather';
 import {ticketData} from '../data';
 import { collection, getDocs } from "firebase/firestore";
+import { sitesData } from '../data/sitesData';
 import { db } from '../firebase/firebase';
 import { ScrollView } from 'react-native-gesture-handler';
 import QRCode from 'react-native-qrcode-svg';
@@ -36,23 +37,23 @@ class MyTickets extends React.Component {
 
     }
 
-    renderTicketData = (ticketData) => {
+    renderTicketData = (sitesData) => {
       return(
-        ticketData.map((ticket)=>{
+        sitesData.map((ticket)=>{
           return (
           <Card containerStyle={{
               backgroundColor: '#fff',
               borderRadius: 12, borderColor: 'grey', borderWidth: 2, marginHorizontal: '3%', 
               marginTop: '3%'
           }} style={{justifyContent:'center'}}>
-            <Card.Title>{ticket.name}</Card.Title>
+            <Card.Title>{ticket.Name}</Card.Title>
             <Card.Image
               style={{ padding: 0, marginBottom: 10 }}
               source={{
                 uri:
-                  'https://www.thoughtco.com/thmb/DBOgHVGLrn4Hy6OOlJxcdExAYuE=/768x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/sunrise-at-taj-mahal--agra--uttar-pradash--india-583682538-5b91840bc9e77c0050bdc67b.jpg',
+                  ticket.ImageUrl[0]
               }}
-            />
+            /> 
             <Text style={{fontWeight: 'bold', color: 'black', marginLeft: "0%", marginTop: "2%"}}>
                 <Icon name='calendar' type="font-awesome-5" color='black' size={18}
                     iconStyle={{marginRight: 10}} />
@@ -103,7 +104,7 @@ class MyTickets extends React.Component {
                 <View style={{height:'100%', backgroundColor: "#00000099"}}>
                   <ScrollView style={styles.scrollView}>
                     <View style={{marginBottom: 30}}>
-                      {this.renderTicketData(ticketData)} 
+                      {this.renderTicketData(sitesData)} 
                     </View>
                   </ScrollView>
                 </View>

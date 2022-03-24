@@ -2,7 +2,7 @@ export const sitesData = [
     {
         id: 'YTN2R7w3ekZBxqReqCBN',
         City: "Agra",
-        Description:"The Taj Mahal, is an ivory-white marble mausoleum on the right bank of the river Yamuna in the Indian city of Agra. It was commissioned in 1632 by the Mughal emperor Shah Jahan to house the tomb of his favourite wife, Mumtaz Mahal; it also houses the tomb of Shah Jahan himself.",
+        Description:"The Taj Mahal, is an ivory-white marble mausoleum on the right bank of the river Yamuna in the Indian city of Agra.",
         EntryTime:"",
         ExitTime:"",
         ImageUrl:[
@@ -60,7 +60,7 @@ export const sitesData = [
         Description:"The Rock Garden of Chandigarh is a sculpture garden for rock enthusiasts in Chandigarh, India. It is also known as Nek Chand Saini's Rock Garden after its founder Nek Chand Saini, a government official who started building the garden secretly in his spare time in 1957",
         EntryTime:"2021-02-05T04:43:01.473+00:00",
         ExitTime:"2021-02-05T04:43:01.473+00:00",
-        ImageUrl:[],
+        ImageUrl:["https://img.veenaworld.com/wp-content/uploads/2021/03/Rock-Garden-Chandigarh-1536x1024.jpg?imwidth=1080"],
         Name:"Rock Garden",
         RequiredDocuments:["Aadhar Card","Passport"],
         State:"Chandigarh"
